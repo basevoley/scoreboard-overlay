@@ -2,7 +2,8 @@
 import React from 'react';
 import Scoreboard from './Scoreboard';
 import VerticalTableScoreboard from './VerticalTableScoreboard';
-import MatchupPresentation from './MatchupPresentation'; // New import
+import MatchupPresentation from './MatchupPresentation';
+import LowerThirdMatchup from './LowerThirdMatchup';
 import './App.css';
 
 // Placeholder images for demonstration
@@ -64,6 +65,7 @@ function App() {
         />
       <VerticalTableScoreboard matchData={matchData} scoreboardConfig={verticalConfig} />
       <MatchupPresentation matchData={matchData} />
+      <LowerThirdMatchup matchData={matchData} />
       </div>
   );
 }

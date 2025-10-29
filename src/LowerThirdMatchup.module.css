@@ -1,0 +1,103 @@
+/* src/LowerThirdMatchup.module.css */
+
+.lower-third-wrapper {
+  position: fixed;
+  bottom: 200px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  max-width: 60%;
+  box-sizing: border-box;
+}
+
+.lower-third-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #2c3e50;
+  color: #ecf0f1;
+  font-family: Arial, sans-serif;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.team-logo-left,
+.team-logo-right {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.team-logo {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 2px solid #3498db;
+}
+
+.text-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 5px;
+  flex-grow: 1;
+  /* width: 100%; <<-- ADD THIS LINE */
+}
+
+.teams-vs {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.team-name {
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.vs {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #3498db;
+}
+
+.animated-text-container {
+  overflow: hidden;
+  height: 1.2rem;
+  position: relative;
+  flex-grow: 1;
+  width: 100%; /* <<-- ADD THIS LINE */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.text-line-2 {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #bdc3c7;
+  text-transform: uppercase;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.text-line-2.is-visible {
+  opacity: 1;
+}
+
+.competition-logo {
+  margin-top: 5px;
+}
+
+.competition-logo-img {
+  height: 24px;
+}
