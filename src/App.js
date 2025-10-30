@@ -98,7 +98,7 @@ function App() {
     position: 'top-right' // 'top-left', 'top', 'top-right', 'bottom-left', 'bottom', 'bottom-right'
   };
     const verticalConfig = {
-    position: 'top-left' // Example position for the vertical scoreboard
+    position: 'bottom-left' // Example position for the vertical scoreboard
   };
 
   // Function to simulate a new match event

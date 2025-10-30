@@ -1,10 +1,16 @@
 // src/VerticalScoreboard.js
 import React from 'react';
-import styles from './VerticalTableScoreboard.module.css'; // Note: The previous example used the table module, so we'll stick with that naming.
+import styles from './VerticalTableScoreboard.module.css';
+import useDropline from './hooks/useDropline'; // Import the custom hook
+import DroplinePanel from './DroplinePanel';
+
 
 const VerticalTableScoreboard = ({ matchData, scoreboardConfig  }) => {
   const { teamA, teamB } = matchData;
+  const { panelData, shouldAnimate } = useDropline(matchData.matchEvent); // Use the custom hook
+
   const positionClass = scoreboardConfig.position ? styles[scoreboardConfig.position] : '';
+  const isTopPosition = scoreboardConfig.position && scoreboardConfig.position.startsWith('top');
 
 
   const renderTeamRow = (team) => {
@@ -46,6 +52,15 @@ const VerticalTableScoreboard = ({ matchData, scoreboardConfig  }) => {
             {renderTeamRow(teamB)}
           </tbody>
         </table>
+      {panelData && (
+        <DroplinePanel
+          icon={panelData.icon}
+          textLine1={panelData.textLine1}
+          textLine2={panelData.textLine2}
+          isTopPosition={isTopPosition} // Pass the position prop
+          isAnimatedIn={shouldAnimate}
+        />
+      )}
     </div>
   );
 };
