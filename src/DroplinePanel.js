@@ -2,13 +2,15 @@
 import React from 'react';
 import styles from './DroplinePanel.module.css';
 
-const DroplinePanel = ({ icon, textLine1, textLine2 }) => {
+const DroplinePanel = ({ icon, textLine1, textLine2, isTopPosition }) => {
   if (!textLine1 && !textLine2) {
-    return null; // Don't render if there's no text
+    return null;
   }
   
+  const panelPositionClass = isTopPosition ? styles['on-top'] : styles['on-bottom'];
+  
   return (
-    <div className={styles['dropline-panel']}>
+    <div className={`${styles['dropline-panel']} ${panelPositionClass}`}>
       {icon && <img src={icon} alt="Info Icon" className={styles['dropline-icon']} />}
       <div className={styles['text-container']}>
         {textLine1 && <span className={styles['text-line-1']}>{textLine1}</span>}
@@ -17,5 +19,4 @@ const DroplinePanel = ({ icon, textLine1, textLine2 }) => {
     </div>
   );
 };
-
 export default DroplinePanel;

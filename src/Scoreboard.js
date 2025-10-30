@@ -9,6 +9,7 @@ const Scoreboard = ({ matchData, scoreboardConfig  }) => {
 
     // You can derive the class name from the prop
   const positionClass = scoreboardConfig.position ? styles[scoreboardConfig.position] : '';
+  const isBottomPosition = scoreboardConfig.position && scoreboardConfig.position.startsWith('bottom');
 
 
   // Dummy function to demonstrate how to trigger the panel
@@ -21,13 +22,13 @@ const Scoreboard = ({ matchData, scoreboardConfig  }) => {
     // setTimeout(() => setPanelData(null), 5000); // Hide after 5 seconds
   };
   
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      handleAction();
-    }, 2000); // Trigger after 2 seconds
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     handleAction();
+  //   }, 2000); // Trigger after 2 seconds
 
-    return () => clearTimeout(timer); // Cleanup on unmount
-  }, []); // Empty dependency array means this runs once on mount
+  //   return () => clearTimeout(timer); // Cleanup on unmount
+  // }, []); // Empty dependency array means this runs once on mount
 
   const renderTimeouts = (team) => {
     return [...Array(2)].map((_, index) => (
@@ -103,8 +104,14 @@ const Scoreboard = ({ matchData, scoreboardConfig  }) => {
           icon={panelData.icon}
           textLine1={panelData.textLine1}
           textLine2={panelData.textLine2}
+          isTopPosition={!isBottomPosition}
         />
       )}
+            {/* Example button to trigger the dropline */}
+      <button onClick={handleAction} style={{ position: 'fixed', top: '100px', left: '100px' }}>
+        Show Dropline
+      </button>
+
     </div>
   );
 };

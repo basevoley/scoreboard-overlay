@@ -90,7 +90,7 @@ function App() {
     winner: winner, // Add the winner info
   };
     const scoreboardConfig = {
-    position: 'bottom-right' // 'top-left', 'top', 'top-right', 'bottom-left', 'bottom', 'bottom-right'
+    position: 'top' // 'top-left', 'top', 'top-right', 'bottom-left', 'bottom', 'bottom-right'
   };
     const verticalConfig = {
     position: 'top-left' // Example position for the vertical scoreboard
