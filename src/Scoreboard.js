@@ -5,30 +5,57 @@ import DroplinePanel from "./DroplinePanel"; // New import
 
 const Scoreboard = ({ matchData, scoreboardConfig  }) => {
   const { teamA, teamB } = matchData;
+  const [isPanelVisible, setIsPanelVisible] = useState(false);
   const [panelData, setPanelData] = useState(null); // State to control the panel
+  const [shouldAnimate, setShouldAnimate] = useState(false);
 
-    // You can derive the class name from the prop
   const positionClass = scoreboardConfig.position ? styles[scoreboardConfig.position] : '';
   const isBottomPosition = scoreboardConfig.position && scoreboardConfig.position.startsWith('bottom');
 
+// Use useEffect to watch for changes in matchEvent
+  useEffect(() => {
+    const { matchEvent } = matchData;
 
-  // Dummy function to demonstrate how to trigger the panel
-  const handleAction = () => {
-    setPanelData({
-      icon: "/ref_flag.png", // Replace with your icon path
-      textLine1: "Referee Decision",
-      textLine2: "Player Substitution",
-    });
-    // setTimeout(() => setPanelData(null), 5000); // Hide after 5 seconds
-  };
-  
-  // useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     handleAction();
-  //   }, 2000); // Trigger after 2 seconds
+    if (matchEvent.type) {
+      let icon, textLine1, textLine2;
 
-  //   return () => clearTimeout(timer); // Cleanup on unmount
-  // }, []); // Empty dependency array means this runs once on mount
+      // Logic to determine dropline content based on the event type
+      switch (matchEvent.type) {
+        case 'referee-call':
+          icon = '/ref_flag.png';
+          textLine1 = matchEvent.details.text;
+          // textLine2 = `Call at ${new Date(matchEvent.timestamp).toLocaleTimeString()}`;
+          break;
+        case 'substitution':
+          icon = '/substitution-icon.webp';
+          textLine1 = `Substitution: ${matchEvent.details.player}`;
+          textLine2 = `for ${matchEvent.details.team}`;
+          break;
+        default:
+          icon = null;
+          textLine1 = null;
+          textLine2 = null;
+          break;
+      }
+
+      // Display the dropline
+      if (icon && textLine1) {
+        setPanelData({ icon, textLine1, textLine2 });
+        setIsPanelVisible(true);
+        setTimeout(() => setShouldAnimate(true), 10);
+      }
+    }
+  }, [matchData.matchEvent]); // Dependency array: run effect only when matchEvent changes
+
+  useEffect(() => {
+    if (isPanelVisible) {
+      setTimeout(() => setShouldAnimate(false), 3000);
+      setTimeout(() => {
+        setPanelData(null);
+        setIsPanelVisible(false);
+      }, 3500);
+    }
+  }, [isPanelVisible]);
 
   const renderTimeouts = (team) => {
     return [...Array(2)].map((_, index) => (
@@ -43,9 +70,7 @@ const Scoreboard = ({ matchData, scoreboardConfig  }) => {
 
   return (
     <div className={`${styles['scoreboard-wrapper']} ${positionClass}`}>
-      {/* New wrapper div */}
       <div className={styles["scoreboard-container"]}>
-        {/* Team A */}
         <div className={styles["team-info"]}>
           <img
             src={teamA.logo}
@@ -105,13 +130,9 @@ const Scoreboard = ({ matchData, scoreboardConfig  }) => {
           textLine1={panelData.textLine1}
           textLine2={panelData.textLine2}
           isTopPosition={!isBottomPosition}
+          isAnimatedIn={shouldAnimate}
         />
       )}
-            {/* Example button to trigger the dropline */}
-      <button onClick={handleAction} style={{ position: 'fixed', top: '100px', left: '100px' }}>
-        Show Dropline
-      </button>
-
     </div>
   );
 };

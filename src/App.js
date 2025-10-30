@@ -1,5 +1,5 @@
 // src/App.js
-import React from 'react';
+import React, { useState } from 'react';
 import Scoreboard from './Scoreboard';
 import VerticalTableScoreboard from './VerticalTableScoreboard';
 import MatchupPresentation from './MatchupPresentation';
@@ -18,7 +18,7 @@ function App() {
 
   const winner = finalScoreA > finalScoreB ? 'teamA' : 'teamB';
 
-  const matchData = {
+  const [matchData, setMatchData] = useState({
     teamA: {
       logo: 'https://www.todovoleibol.com/images/escudos/cv-alcala.jpg',
       name: 'CV Alcalá Glauka Viajes A',
@@ -87,20 +87,31 @@ function App() {
     competitionLogo: 'https://fmvoley.com/images/logo.svg', // Add this line
     category: 'Liga Regular - Jornada 15',
     location: 'Pabellón Demetrio Lozano, Alcalá de Henares',
-    winner: winner, // Add the winner info
-  };
+    winner: winner,
+    matchEvent: {
+      timestamp: Date.now(),
+      type: null,
+      details: null,
+    },
+  });
     const scoreboardConfig = {
-    position: 'top' // 'top-left', 'top', 'top-right', 'bottom-left', 'bottom', 'bottom-right'
+    position: 'top-right' // 'top-left', 'top', 'top-right', 'bottom-left', 'bottom', 'bottom-right'
   };
     const verticalConfig = {
     position: 'top-left' // Example position for the vertical scoreboard
   };
-  // const [panelData, setPanelData] = useState(null);
 
-  // const handleAction = (icon, textLine1, textLine2) => {
-  //   setPanelData({ icon, textLine1, textLine2 });
-  //   setTimeout(() => setPanelData(null), 5000);
-  // };
+  // Function to simulate a new match event
+  const triggerMatchEvent = (eventType, eventDetails) => {
+    setMatchData((prevData) => ({
+      ...prevData,
+      matchEvent: {
+        timestamp: Date.now(),
+        type: eventType,
+        details: eventDetails,
+      },
+    }));
+  };
   
   return (
     <div>
@@ -114,6 +125,14 @@ function App() {
       <LowerThirdMatchup matchData={matchData} />
       <TeamComparisonTable matchData={matchData} />
       <AfterMatchStats matchData={matchData} />
+            {/* Control buttons for demonstration */}
+      <button onClick={() => triggerMatchEvent('referee-call', { text: 'Referee calls timeout for Team A' })}>
+        Referee Timeout
+      </button>
+      <button onClick={() => triggerMatchEvent('substitution', { player: 'Player 12', team: 'Team B' })}>
+        Player Substitution
+      </button>
+
       </div>
   );
 }
