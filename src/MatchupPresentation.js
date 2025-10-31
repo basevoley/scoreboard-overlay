@@ -21,7 +21,9 @@ const MatchupPresentation = ({ matchData, enabled }) => {
         </div>
         <div className={styles['teams-container']}>
           <div className={styles['team']}>
-            <img src={teamA.logo} alt={teamA.name} className={styles['team-logo']} />
+            <div className={styles['logo-container']}>
+              <img src={teamA.logo} alt={teamA.name} className={styles['team-logo']} />
+            </div>
             <span className={styles['team-name']}>{teamA.name}</span>
           </div>
           <div className={styles['vs-container']}>
@@ -29,7 +31,9 @@ const MatchupPresentation = ({ matchData, enabled }) => {
             {competitionLogo && <img src={competitionLogo} alt="Competition Logo" className={styles['competition-logo']} style={{ backgroundColor: '#bdc3c7', padding: '5px' }} />}
           </div>
           <div className={styles['team']}>
-            <img src={teamB.logo} alt={teamB.name} className={styles['team-logo']} />
+            <div className={styles['logo-container']}>
+              <img src={teamB.logo} alt={teamB.name} className={styles['team-logo']} />
+            </div>
             <span className={styles['team-name']}>{teamB.name}</span>
           </div>
         </div>

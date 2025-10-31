@@ -23,15 +23,19 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #2c3e50;
+  background: #34495e;
+  
   color: #ecf0f1;
   font-family: Arial, sans-serif;
   padding: 15px;
   border-radius: 12px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  /* Add a stronger shadow */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 0 10px rgba(255, 255, 255, 0.1); 
   text-align: center;
   max-width: 800px;
   margin: 20px auto;
+  /* Add a backdrop blur for a nice glass effect (optional, modern browsers only) */
+  backdrop-filter: blur(10px); 
 }
 
 .details-container {
@@ -93,11 +97,43 @@
   width: 300px;
 }
 
-.team-logo {
-  width: 200px; /* Bigger logos */
-  height: 200px; /* Bigger logos */ 
+.logo-container {
+  position: relative; /* Needed for positioning the pseudo-element */
+  width: 200px;
+  height: 200px;
   border-radius: 50%;
-  border: 3px solid #3498db;
+  overflow: hidden;
+  border: 3px solid rgba(52, 152, 219, 0.5);
+  box-shadow: 0 0 15px rgba(52, 152, 219, 1);
+}
+
+/* Glossy animation effect */
+.logo-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -200%; /* Start the sweep off-screen to the left */
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: skewX(-20deg); /* Angle the sweep */
+  animation: shine 3s infinite linear;
+}
+
+@keyframes shine {
+  0% { left: -200%; }
+  100% { left: 200%; } /* End the sweep off-screen to the right */
+}
+
+.team-logo {
+  width: 200px; 
+  height: 200px; 
+  border-radius: 50%;
 }
 
 .team-name {
@@ -117,6 +153,10 @@
 .vs {
   font-size: 5rem;
   font-weight: bold;
-  color: #3498db;
+  /* Use a gradient on the VS text too */
+  background: linear-gradient(to bottom, #3498db 40%, #2ecc71);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent; /* Makes the gradient visible */
   line-height: 200px;
 }
