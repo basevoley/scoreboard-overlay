@@ -1,12 +1,16 @@
 // src/MatchupPresentation.js
 import React from 'react';
 import styles from './MatchupPresentation.module.css';
+import useComponentVisibility from './hooks/useComponentVisibility';
 
-const MatchupPresentation = ({ matchData }) => {
+const MatchupPresentation = ({ matchData, enabled }) => {
+  const { isVisible, animationClass } = useComponentVisibility(enabled, 500);
+  if (!isVisible) return null;
+
   const { teamA, teamB, competition, competitionLogo, category, location } = matchData;
 
   return (
-    <div className={`${styles['matchup-wrapper']} ${styles['centered']}`}>
+    <div className={`${styles['matchup-wrapper']} ${styles[animationClass]}`}>
       <div className={styles['matchup-card']}>
         <div className={styles['details-container']}>
           <div className={styles['competition-info']}>

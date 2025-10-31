@@ -71,6 +71,7 @@
   background-color: #ecf0f1;
   padding: 3px;
   border: 1px solid #61dafb;
+  object-fit: contain;
 }
 
 .text-container {

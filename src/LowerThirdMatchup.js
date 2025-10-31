@@ -1,23 +1,27 @@
 // src/LowerThirdMatchup.js
 import React, { useState, useEffect } from 'react';
 import styles from './LowerThirdMatchup.module.css';
+import useComponentVisibility from './hooks/useComponentVisibility';
 
-const LowerThirdMatchup = ({ matchData }) => {
+const LowerThirdMatchup = ({ matchData, enabled }) => {
+  const { isVisible, animationClass } = useComponentVisibility(enabled, 500);
+  
   const { teamA, teamB, competition, competitionLogo, category, location } = matchData;
 
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
   const cyclingTexts = [`${competition} - ${category}`, location];
-
+  
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentTextIndex((prevIndex) => (prevIndex + 1) % cyclingTexts.length);
     }, 5000);
-
     return () => clearInterval(interval);
   }, [cyclingTexts.length]);
 
+  if (!isVisible) return null;
+
   return (
-    <div className={styles['lower-third-wrapper']}>
+    <div className={`${styles['lower-third-wrapper']} ${styles[animationClass]}`}>
       <div className={styles['lower-third-container']}>
         <div className={styles['team-logo-left']}>
           <img src={teamA.logo} alt={teamA.name} className={styles['team-logo']} />

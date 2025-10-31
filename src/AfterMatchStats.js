@@ -1,8 +1,12 @@
 // src/AfterMatchStats.js
 import React from "react";
 import styles from "./AfterMatchStats.module.css";
+import useComponentVisibility from './hooks/useComponentVisibility';
 
-const AfterMatchStats = ({ matchData }) => {
+const AfterMatchStats = ({ matchData, afterMatchConfig }) => {
+    
+  const { isVisible, animationClass } = useComponentVisibility(afterMatchConfig.enabled, 500);
+  if (!isVisible) return null;
     const { teamA, teamB, competition, competitionLogo, category, winner } =
         matchData;
 
@@ -16,7 +20,7 @@ const AfterMatchStats = ({ matchData }) => {
     ];
 
     return (
-        <div className={styles["after-match-wrapper"]}>
+        <div className={`${styles['after-match-wrapper']} ${styles[animationClass]}`}>
             <div className={styles["info-header"]}>
                 <div className={styles["competition-logo"]}>
                     {competitionLogo && (
@@ -58,7 +62,7 @@ const AfterMatchStats = ({ matchData }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {stats.map((stat, index) => (
+                    {afterMatchConfig.showStats && stats.map((stat, index) => (
                         <tr key={index}>
                             <td className={styles["stat-value"]}>{teamA.stats[stat.key]}</td>
                             <td className={styles["stat-label"]}>{stat.label}</td>

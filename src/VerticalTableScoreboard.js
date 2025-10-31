@@ -3,11 +3,13 @@ import React from 'react';
 import styles from './VerticalTableScoreboard.module.css';
 import useDropline from './hooks/useDropline'; // Import the custom hook
 import DroplinePanel from './DroplinePanel';
-
+import useComponentVisibility from './hooks/useComponentVisibility'; 
 
 const VerticalTableScoreboard = ({ matchData, scoreboardConfig  }) => {
   const { teamA, teamB } = matchData;
   const { panelData, shouldAnimate } = useDropline(matchData.matchEvent); // Use the custom hook
+  const { isVisible, animationClass } = useComponentVisibility(scoreboardConfig.enabled  && (scoreboardConfig.type=== 'vertical-table'), 500);
+  if (!isVisible) return null;
 
   const positionClass = scoreboardConfig.position ? styles[scoreboardConfig.position] : '';
   const isTopPosition = scoreboardConfig.position && scoreboardConfig.position.startsWith('top');
@@ -45,7 +47,7 @@ const VerticalTableScoreboard = ({ matchData, scoreboardConfig  }) => {
   };
 
   return (
-    <div className={`${styles['scoreboard-wrapper']} ${positionClass} ${styles['table-container']}`}>
+    <div className={`${styles['scoreboard-wrapper']} ${positionClass} ${styles['table-container']} ${styles[animationClass]}`}>
         <table className={styles['scoreboard-table']}>
           <tbody>
             {renderTeamRow(teamA)}

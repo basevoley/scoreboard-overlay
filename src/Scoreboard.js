@@ -1,12 +1,15 @@
 // src/Scoreboard.js
 import React from "react";
 import styles from "./Scoreboard.module.css";
-import useDropline from './hooks/useDropline'; // Import the custom hook
-import DroplinePanel from "./DroplinePanel"; // New import
+import useDropline from './hooks/useDropline';
+import DroplinePanel from "./DroplinePanel";
+import useComponentVisibility from './hooks/useComponentVisibility'; 
 
 const Scoreboard = ({ matchData, scoreboardConfig  }) => {
   const { teamA, teamB } = matchData;
-  const { panelData, shouldAnimate } = useDropline(matchData.matchEvent); // Use the custom hook
+  const { panelData, shouldAnimate } = useDropline(matchData.matchEvent);
+  const { isVisible, animationClass } = useComponentVisibility(scoreboardConfig.enabled && (scoreboardConfig.type=== 'classic'), 500);
+  if (!isVisible) return null;
 
   const positionClass = scoreboardConfig.position ? styles[scoreboardConfig.position] : '';
   const isBottomPosition = scoreboardConfig.position && scoreboardConfig.position.startsWith('bottom');
@@ -23,7 +26,7 @@ const Scoreboard = ({ matchData, scoreboardConfig  }) => {
   };
 
   return (
-    <div className={`${styles['scoreboard-wrapper']} ${positionClass}`}>
+    <div className={`${styles['scoreboard-wrapper']} ${positionClass} ${styles[animationClass]}`}>
       <div className={styles["scoreboard-container"]}>
         <div className={styles["team-info"]}>
           <img

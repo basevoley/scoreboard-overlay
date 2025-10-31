@@ -16,12 +16,18 @@ const useDropline = (matchEvent) => {
       case 'referee-call':
         icon = '/ref_flag.png';
         textLine1 = matchEvent.details.text;
+        // textLine2 = `Call at ${new Date(matchEvent.timestamp).toLocaleTimeString()}`;
         textLine2 = `Call at ${new Date(matchEvent.timestamp).toLocaleTimeString()}`;
         break;
       case 'substitution':
         icon = '/substitution-icon.webp';
         textLine1 = `Substitution: ${matchEvent.details.player}`;
         textLine2 = `for ${matchEvent.details.team}`;
+        break;
+      case 'timeout':
+        icon = '/clock-timeout.png';
+        textLine1 = matchEvent.details.text;
+        textLine2 = matchEvent.details.team;
         break;
       default:
         icon = null;
@@ -33,7 +39,7 @@ const useDropline = (matchEvent) => {
     if (icon && textLine1) {
       setPanelData({ icon, textLine1, textLine2 });
       setIsPanelVisible(true);
-      setTimeout(() => setShouldAnimate(true), 10);
+      setTimeout(() => setShouldAnimate(true), 50);
     }
   }, [matchEvent]);
 

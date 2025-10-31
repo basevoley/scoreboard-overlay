@@ -1,46 +1,68 @@
 /* src/VerticalTableScoreboard.css */
 /* Wrapper for the scoreboard table */
 .scoreboard-wrapper {
-  position: fixed;
-  z-index: 100;
+    position: absolute;
+    top: 20px;
+    bottom: 20px;
+    left: 20px; 
+    right: 20px;
+
+    /* The key: Use auto margins to distribute the space equally */
+    margin: auto; 
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  opacity: 0; 
 }
 
-/* Position for the top-left corner */
-.top-left {
-  top: 20px;
-  left: 20px;
+.fade-in {
+  opacity: 1;
 }
 
-/* Position for the top-center */
+.fade-out {
+  opacity: 0;
+}
+
+/* Position-specific styles now only update the edge constraints (top/bottom/left/right) */
 .top {
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
+    top: 20px;
+    bottom: auto;
 }
 
-/* Position for the top-right corner */
-.top-right {
-  top: 20px;
-  right: 20px;
-}
-
-/* Position for the bottom-left corner */
-.bottom-left {
-  bottom: 20px;
-  left: 20px;
-}
-
-/* Position for the bottom-center */
 .bottom {
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
+    top: auto;
+    bottom: 20px;
 }
 
-/* Position for the bottom-right corner */
+.top-left {
+    top: 20px;
+    left: 20px;
+    right: auto;
+    bottom: auto;
+    margin: 0; /* Remove auto margins to stick to the corner */
+}
+
+.top-right {
+    top: 20px;
+    right: 20px;
+    left: auto;
+    bottom: auto;
+    margin: 0;
+}
+
+/* Add styles for bottom-left and bottom-right as needed */
 .bottom-right {
-  bottom: 20px;
-  right: 20px;
+    bottom: 20px;
+    right: 20px;
+    top: auto;
+    left: auto;
+    margin: 0;
+}
+
+.bottom-left {
+    bottom: 20px;
+    left: 20px;
+    top: auto;
+    right: auto;
+    margin: 0;
 }
 
 .table-container {

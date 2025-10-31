@@ -1,8 +1,12 @@
 // src/TeamComparisonTable.js
 import React from 'react';
 import styles from './TeamComparisonTable.module.css';
+import useComponentVisibility from './hooks/useComponentVisibility';
 
-const TeamComparisonTable = ({ matchData }) => {
+const TeamComparisonTable = ({ matchData, enabled }) => {
+  const { isVisible, animationClass } = useComponentVisibility(enabled, 500);
+  if (!isVisible) return null;
+
   const { teamA, teamB } = matchData;
 
   const stats = [
@@ -19,7 +23,7 @@ const TeamComparisonTable = ({ matchData }) => {
   ];
 
   return (
-    <div className={styles['comparison-wrapper']}>
+    <div className={`${styles['comparison-wrapper']} ${styles[animationClass]}`}>
       <table className={styles['comparison-table']}>
         <thead>
           <tr>
