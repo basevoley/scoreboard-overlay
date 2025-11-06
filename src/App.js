@@ -90,8 +90,8 @@ const initialConfig = {
 };
 
 function App() {
-  const [socket, setSocket] = useState(null);
-  const [key, setKey] = useState('');
+  // const [socket, setSocket] = useState(null);
+  // const [key, setKey] = useState('');
   const [matchDetails, setMatchDetails] = useState(initialMatchDetails);
   const [matchData, setMatchData] = useState(initialMatchData);
 
@@ -103,7 +103,7 @@ function App() {
     const extractedKey = urlParams.get('key');
 
     if (extractedKey) {
-      setKey(extractedKey);
+      // setKey(extractedKey);
 
       // Connect to the Socket.io server using the extracted key
       const socketInstance = io('http://localhost:3005', {
@@ -136,7 +136,7 @@ function App() {
         console.error('Socket.io error:', error);
       });
 
-      setSocket(socketInstance);
+      // setSocket(socketInstance);
 
       // Cleanup function to disconnect the socket when the component unmounts
       return () => {
