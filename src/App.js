@@ -130,6 +130,11 @@ function App() {
         setMatchData(data);
       });
 
+      socketInstance.on('updateConfig', (data) => {
+        console.log('Message received:', JSON.stringify(data));
+        setConfig(data);
+      });
+
       socketInstance.on('disconnect', () => {
         console.log('Socket.io connection closed');
       });
@@ -218,7 +223,7 @@ function App() {
         <AfterMatchStats matchDetails={matchDetails}  matchData={matchData} afterMatchConfig={config.afterMatch} />
 
       {/* Control buttons for demonstration */}
-      <div className="controls">
+      <div className="controls" style={{display: 'none'}}>
         <button onClick={handleConfigUpdate}>
           Toggle Scoreboard Visibility (Enabled: {config.scoreboard.enabled.toString()})
         </button>
