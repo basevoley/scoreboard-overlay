@@ -17,7 +17,7 @@ const useDropline = (matchEvent) => {
         icon = '/ref_flag.png';
         textLine1 = matchEvent.details.text;
         // textLine2 = `Call at ${new Date(matchEvent.timestamp).toLocaleTimeString()}`;
-        textLine2 = `Call at ${new Date(matchEvent.timestamp).toLocaleTimeString()}`;
+        textLine2 = matchEvent.details.team;
         break;
       case 'substitution':
         icon = '/substitution-icon.webp';

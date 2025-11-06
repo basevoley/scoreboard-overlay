@@ -32,7 +32,7 @@ const VerticalTableScoreboard = ({ matchDetails, matchData, scoreboardConfig  })
           </div>
           <div className={styles['team-cell-indicators']}>
             <div className={styles['timeouts-container']}>{timeoutIndicators}</div>
-            {currentServer === team && <div className={styles['serving-indicator']}></div>}
+            <div className={`${styles['serving-indicator']} ${currentServer === team? '':styles['not-serving']}` }></div>
           </div>
         </td>
         <td className={styles['sets-won-cell']}>{setsWon[team]}</td>

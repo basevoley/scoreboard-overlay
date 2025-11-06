@@ -57,7 +57,7 @@ const AfterMatchStats = ({ matchDetails, matchData, afterMatchConfig }) => {
                             <div className={styles['logo-container']}>
                                 <img src={matchDetails.teamLogos.teamB} alt={matchDetails.teams.teamB} className={styles["team-logo"]} />
                             </div>
-                            <div className={styles["team-name"]}>{matchDetails.teams.teamA}</div>
+                            <div className={styles["team-name"]}>{matchDetails.teams.teamB}</div>
                         </th>
                     </tr>
                 </thead>
