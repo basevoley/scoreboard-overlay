@@ -89,6 +89,8 @@ const initialConfig = {
   },
 };
 
+const SOCKET_SERVER_URL = process.env.REACT_APP_SOCKET_URL || 'http://localhost:3005';
+
 function App() {
   // const [socket, setSocket] = useState(null);
   // const [key, setKey] = useState('');
@@ -106,7 +108,7 @@ function App() {
       // setKey(extractedKey);
 
       // Connect to the Socket.io server using the extracted key
-      const socketInstance = io('http://localhost:3005', {
+      const socketInstance = io(SOCKET_SERVER_URL, {
         query: { key: extractedKey },
       });
 
