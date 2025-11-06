@@ -8,7 +8,7 @@ const AfterMatchStats = ({ matchDetails, matchData, afterMatchConfig }) => {
   const { isVisible, animationClass } = useComponentVisibility(afterMatchConfig.enabled, 500);
   if (!isVisible) return null;
     const { statistics, winner, setsWon, } = matchData;
-    const { matchHeader, competitionLogo, extendedInfo, stadium } = matchDetails;
+    const { matchHeader, competitionLogo, extendedInfo } = matchDetails;
 
     const stats = [
         { label: "SERVING ACES", key: "ace" },
@@ -43,7 +43,7 @@ const AfterMatchStats = ({ matchDetails, matchData, afterMatchConfig }) => {
                         </th>
                         <th className={styles["empty-cell"]}>
                             <div>
-                                <span>FINAL</span>
+                                <span>{winner? "FINAL" : "EN JUEGO"}</span>
                                 <div className={styles["final-score"]}>
                                     <span className={`${winner === "teamA" ? styles["winner"] : ""}`} >
                                         {setsWon.teamA}
