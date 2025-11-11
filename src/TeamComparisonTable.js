@@ -8,16 +8,17 @@ const TeamComparisonTable = ({ matchDetails, enabled }) => {
   if (!isVisible) return null;
 
   const stats = [
-    { label: 'Ranking', key: 'ranking' },
-    { label: 'Matches Played', key: 'matchesPlayed' },
-    { label: 'Total Matches Won', key: 'totalMatchesWon' },
-    { label: 'Won (3 pts)', key: 'won3Points' },
-    { label: 'Won (2 pts)', key: 'won2Points' },
-    { label: 'Total Matches Lost', key: 'totalMatchesLost' },
-    { label: 'Lost (1 pt)', key: 'lost1Point' },
-    { label: 'Lost (0 pts)', key: 'lost0Points' },
-    { label: 'Total Points Scored', key: 'totalPointsScored' },
-    { label: 'Total Points Received', key: 'totalPointsReceived' },
+    { label: 'Posición', key: 'ranking' },
+    { label: 'Puntos', key: 'competitionPoints' },
+    { label: 'Partidos Jugados', key: 'matchesPlayed' },
+    { label: 'Total Partidos Ganados', key: 'totalMatchesWon' },
+    { label: 'Ganados (3 pts)', key: 'won3Points' },
+    { label: 'Ganados (2 pts)', key: 'won2Points' },
+    { label: 'Total Partidos Perdidos', key: 'totalMatchesLost' },
+    { label: 'Perdidos (1 pt)', key: 'lost1Point' },
+    { label: 'Perdidos (0 pts)', key: 'lost0Points' },
+    { label: 'Total Puntos Realizados', key: 'totalPointsScored' },
+    { label: 'Total Puntos Recibidos', key: 'totalPointsReceived' },
   ];
 
   return (
