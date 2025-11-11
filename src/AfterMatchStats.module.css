@@ -109,7 +109,7 @@
 }
 
 /* Glossy animation effect */
-.logo-container::after {
+.winner > .logo-container::after {
   content: '';
   position: absolute;
   top: 0;
