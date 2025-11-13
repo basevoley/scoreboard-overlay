@@ -8,6 +8,7 @@ import TeamComparisonTable from './TeamComparisonTable';
 import AfterMatchStats from './AfterMatchStats';
 import io from 'socket.io-client';
 import './App.css';
+import UniformIcon from './UniformIcon';
 
 const initialMatchDetails = {
     teams: { teamA: 'CV Alcala Glauka Viajes', teamB: 'CV el otro con patrocinador' },
@@ -224,6 +225,9 @@ function App() {
 
       {/* Control buttons for demonstration */}
       <div className="controls" style={{display: 'none'}}>
+        <div style={{ width: '40px', height: 'auto' }}>
+        <UniformIcon shirtColor={'#0011ffff'} shortsColor={'#1dfc09ff'} />
+        </div>
         <button onClick={handleConfigUpdate}>
           Toggle Scoreboard Visibility (Enabled: {config.scoreboard.enabled.toString()})
         </button>
