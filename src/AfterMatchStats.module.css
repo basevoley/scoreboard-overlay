@@ -153,6 +153,21 @@
   margin-top: 15px;
   font-size: 1rem;
   color: #bdc3c7;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.set-scores div {
+  font-size: small;
+}
+
+.set-winner {
+  font-weight: bold;
+  color: #ecf0f1;
+}
+
+.set-scores div:last-child {
+  border-right: none;
 }
 
 .stat-value {

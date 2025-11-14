@@ -55,7 +55,11 @@ const AfterMatchStats = ({ matchDetails, matchData, afterMatchConfig }) => {
                                 </div>
                                 <div className={styles["set-scores"]}>
                                     {setScores.map((setScore, index) => (
-                                        <span key={index}>{setScore.teamA} - {setScore.teamB}</span>
+                                        <div>
+                                            <span key={index} className={`${setScore.teamA > setScore.teamB ? styles["set-winner"] : ""}`}>{setScore.teamA}</span>
+                                             - 
+                                            <span key={index} className={`${setScore.teamB > setScore.teamA ? styles["set-winner"] : ""}`}>{setScore.teamB}</span>
+                                        </div>
                                     ))}
 
                                 </div>
