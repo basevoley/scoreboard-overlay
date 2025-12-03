@@ -29,7 +29,7 @@ const AfterMatchStats = ({ matchDetails, matchData, afterMatchConfig }) => {
                         <img src={competitionLogo} alt="Competition Logo" className={styles["competition-logo-img"]} style={{ backgroundColor: "#bdc3c7", padding: "5px" }} />
                     )}
                 </div>
-                <div>
+                <div style={{ width: "100%" }}>
                     <div className={styles["competition"]}>{matchHeader}</div>
                     <div className={styles["category"]}>{extendedInfo}</div>
                 </div>
