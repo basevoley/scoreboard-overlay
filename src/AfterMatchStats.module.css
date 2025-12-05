@@ -155,6 +155,8 @@
   color: #bdc3c7;
   display: flex;
   justify-content: space-evenly;
+  flex-direction: column;
+  gap: 3px;
 }
 
 .set-scores div {
@@ -163,11 +165,18 @@
 
 .set-winner {
   font-weight: bold;
-  color: #ecf0f1;
+  color: #f1c40f;
 }
 
 .set-scores div:last-child {
   border-right: none;
+}
+
+.current-score {
+  background-color: #3498db;
+  color: #ecf0f1;
+  padding: 1px;
+  border-radius: 2px;
 }
 
 .stat-value {

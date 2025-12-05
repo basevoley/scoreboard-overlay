@@ -7,7 +7,7 @@ const AfterMatchStats = ({ matchDetails, matchData, afterMatchConfig }) => {
 
     const { isVisible, animationClass } = useComponentVisibility(afterMatchConfig.enabled, 500);
     if (!isVisible) return null;
-    const { statistics, winner, setsWon, setScores, } = matchData;
+    const { statistics, winner, setsWon, setScores, scores, } = matchData;
     const { matchHeader, competitionLogo, extendedInfo, } = matchDetails;
 
     const stats = [
@@ -56,11 +56,12 @@ const AfterMatchStats = ({ matchDetails, matchData, afterMatchConfig }) => {
                                 <div className={styles["set-scores"]}>
                                     {setScores.map((setScore, index) => (
                                         <div  key={index} >
-                                            <span className={`${setScore.teamA > setScore.teamB ? styles["set-winner"] : ""}`}>{setScore.teamA}</span>
+                                            <span className={`${setScore.teamA > setScore.teamB ? styles["set-winner"] : ""}`}>{setScore.teamA} </span>
                                              - 
-                                            <span className={`${setScore.teamB > setScore.teamA ? styles["set-winner"] : ""}`}>{setScore.teamB}</span>
+                                            <span className={`${setScore.teamB > setScore.teamA ? styles["set-winner"] : ""}`}> {setScore.teamB}</span>
                                         </div>
                                     ))}
+                                    {!winner && (<div><span className={styles["current-score"]}>{scores.teamA} - {scores.teamB}</span></div>)}
 
                                 </div>
                             </div>
