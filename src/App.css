@@ -51,3 +51,25 @@
 h1 {
   margin-bottom: 40px;
 }
+
+.connecting-animation {
+  font-size: 20px;
+  color: blue;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.success-message {
+  font-size: 20px;
+  color: green;
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  width: min-content;
+}

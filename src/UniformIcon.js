@@ -1,7 +1,7 @@
 // components/UniformIcon.jsx (Alternative method)
 import React from 'react';
 
-const UniformIcon = ({ shirtColor }) => {
+const UniformIcon = ({ shirtColor, shirtNumber }) => {
   return (
     // <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" >
     //   {/* <!-- T-Shirt --> */}
@@ -40,8 +40,8 @@ const UniformIcon = ({ shirtColor }) => {
           <path  d="M8.6084 2.6167C8.74488 7.39742 10.0014 12.4839 12.2422 16.4712C14.2609 20.0631 17.1342 22.8461 20.7705 23.5962C18.7738 24.5277 16.4851 25.0669 14.1973 25.0669C11.3939 25.0668 8.58866 24.2604 6.32227 22.9097C6.79344 20.774 7.375 17.8359 7.375 15.02C7.375 14.4818 7.36491 14.153 7.34082 13.9312C7.31266 13.672 7.26143 13.536 7.19727 13.3979C7.15358 13.3041 7.04319 13.1405 6.88574 11.8608L6.66797 10.0903L5.77148 11.6333L4.96484 13.022L4.95898 13.0298C3.26339 13.0172 2.30461 12.2191 1.81348 11.7583C2.40759 10.7013 2.86622 9.42102 3.24902 8.26514C3.64132 7.08056 3.94497 6.06579 4.24609 5.4126C4.35854 5.20068 4.46052 5.10189 4.60742 4.96143L4.65723 4.91357L4.69531 4.85596C5.37915 3.80998 6.32522 3.39744 7.76367 2.93896C8.0311 2.85372 8.33464 2.72889 8.6084 2.6167Z" fill="#0C1A26" stroke="#0C1A26" strokeWidth="1.2" />
         </g>
       </svg>
-      <div  className="shirt-number" style={{color: "rgb(255, 255, 255)",position: "absolute",font: "700 .6875rem / 1rem 16px Manrope, sans-serif", letterSpacing: "-.55px", transform: "translateY(-3px)" }}>
-      {/*************SHIRT NUMBER HERE**********/}
+      <div  className="shirt-number" style={{color: "rgb(255, 255, 255)",position: "absolute",font: "700 .6875rem / 1rem Manrope, sans-serif", letterSpacing: "-.55px", transform: "translateY(-3px)" }}>
+      {shirtNumber}
       </div> 
     </div>
   );
