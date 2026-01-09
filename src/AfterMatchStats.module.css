@@ -161,6 +161,7 @@
 
 .set-scores div {
   font-size: small;
+  padding: 3px;
 }
 
 .set-winner {
@@ -175,7 +176,7 @@
 .current-score {
   background-color: #3498db;
   color: #ecf0f1;
-  padding: 1px;
+  padding: 5px;
   border-radius: 2px;
 }
 
