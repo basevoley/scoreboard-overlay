@@ -4,6 +4,8 @@ import styles from "./Scoreboard.module.css";
 import useDropline from './hooks/useDropline';
 import DroplinePanel from "./DroplinePanel";
 import useComponentVisibility from './hooks/useComponentVisibility'; 
+import ContentFlipper from "./ContentFlipper";
+import UniformIcon from "./UniformIcon";
 
 const Scoreboard = ({ matchDetails, matchData, scoreboardConfig  }) => {
   const { timeouts, scores,setsWon, currentServer } = matchData;
@@ -14,6 +16,7 @@ const Scoreboard = ({ matchDetails, matchData, scoreboardConfig  }) => {
 
   const positionClass = scoreboardConfig.position ? styles[scoreboardConfig.position] : '';
   const isBottomPosition = scoreboardConfig.position && scoreboardConfig.position.startsWith('bottom');
+  const flipperContentSize = '32px';
 
   const renderTimeouts = (timeoutsUsed) => {
     return [...Array(2)].map((_, index) => (
@@ -30,11 +33,17 @@ const Scoreboard = ({ matchDetails, matchData, scoreboardConfig  }) => {
     <div className={`${styles['scoreboard-wrapper']} ${positionClass} ${styles[animationClass]}`}>
       <div className={styles["scoreboard-container"]}>
         <div className={styles["team-info"]}>
-          <img
-            src={matchDetails.teamLogos.teamA}
-            alt={matchDetails.teams.teamA}
-            className={styles["team-logo"]}
-          />
+            <ContentFlipper
+              duration={15} // 8 segundos por ciclo completo
+              width={flipperContentSize}
+              height={flipperContentSize}
+              front={
+                <img src={matchDetails.teamLogos.teamA} alt={matchDetails.teams.teamA} className={styles['team-logo']} />
+              }
+              back={
+                <UniformIcon shirtColor={matchDetails.teamColors.teamA} size={flipperContentSize} />
+              }
+            />
           <div className={styles["name-details"]}>
             <div className={styles["name-and-indicator"]}>
               <span className={styles["team-name"]}>{matchDetails.teams.teamA}</span>
@@ -74,11 +83,17 @@ const Scoreboard = ({ matchDetails, matchData, scoreboardConfig  }) => {
               {renderTimeouts(timeouts.teamB)}
             </div>
           </div>
-          <img
-            src={matchDetails.teamLogos.teamB}
-            alt={matchDetails.teams.teamB}
-            className={styles["team-logo"]}
-          />
+            <ContentFlipper
+              duration={15} // 8 segundos por ciclo completo
+              width={flipperContentSize}
+              height={flipperContentSize}
+              front={
+                <img src={matchDetails.teamLogos.teamB} alt={matchDetails.teams.teamB} className={styles['team-logo']} />
+              }
+              back={
+                <UniformIcon shirtColor={matchDetails.teamColors.teamB} size={flipperContentSize} />
+              }
+            />
         </div>
       </div>
       {/* Dropline Panel */}

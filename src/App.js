@@ -17,6 +17,10 @@ const initialMatchDetails = {
     teamA: 'logo192.png',
     teamB: 'logo.svg'
   },
+  teamColors: {
+    teamA: '#007BFF',
+    teamB: '#FF5733'
+  },
   matchHeader: 'CATEGORIA - Division',
   extendedInfo: 'Fase - Jornada X',
   stadium: 'Pabellón donde se juega, Ciudad',
