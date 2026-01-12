@@ -279,7 +279,7 @@ function App() {
           <button onClick={() => triggerMatchEvent('timeout', { text: 'Timeout', team: 'Team A' })}>
             Timeout
           </button>
-          <button onClick={() => triggerMatchEvent('substitution', { player: 'Player 12', team: 'Team B' })}>
+          <button onClick={() => triggerMatchEvent('substitution', { text: 'Subsitution', team: 'Team B' })}>
             Player Substitution
           </button>
           <button onClick={() => handleToggleComponent('matchup')}>

@@ -21,8 +21,8 @@ const useDropline = (matchEvent) => {
         break;
       case 'substitution':
         icon = '/substitution-icon.webp';
-        textLine1 = `Substitution: ${matchEvent.details.player}`;
-        textLine2 = `for ${matchEvent.details.team}`;
+        textLine1 = matchEvent.details.text; //`Substitution: ${matchEvent.details.player}`;
+        textLine2 =  matchEvent.details.team; //`for ${matchEvent.details.team}`;
         break;
       case 'timeout':
         icon = '/clock-timeout.png';
