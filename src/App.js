@@ -6,6 +6,7 @@ import MatchupPresentation from './MatchupPresentation';
 import LowerThirdMatchup from './LowerThirdMatchup';
 import TeamComparisonTable from './TeamComparisonTable';
 import AfterMatchStats from './AfterMatchStats';
+import SocialMediaLowerThird from './SocialMediaLowerThird';
 import io from 'socket.io-client';
 import './App.css';
 import UniformIcon from './UniformIcon';
@@ -67,6 +68,16 @@ const initialConfig = {
   },
   lowerThird: {
     enabled: false,
+  },
+  socialMedia: {
+    enabled: false,
+    channels: [
+      { network: 'YouTube', handle: 'YourChannelName', icon: 'https://upload.wikimedia.org/wikipedia/commons/e/ef/Youtube_logo.png' },
+      { network: 'TikTok', handle: 'YourTikTokHandle', icon: 'https://images.seeklogo.com/logo-png/34/2/tiktok-logo-png_seeklogo-340606.png' },
+      { network: 'Instagram', handle: 'YourInstagram', icon: 'https://upload.wikimedia.org/wikipedia/commons/a/ac/Instagram-Gradient-Logo-PNG.png' },
+      { network: 'Twitch', handle: 'YourTwitchChannel', icon: 'https://images.seeklogo.com/logo-png/44/2/twitch-new-logo-png_seeklogo-447573.png' },
+      { network: 'Facebook', handle: 'YourFacebook', icon: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Facebook_Logo_%282019%29.png/1200px-Facebook_Logo_%282019%29.png' },
+    ],
   },
   teamComparison: {
     enabled: false,
@@ -247,6 +258,7 @@ function App() {
           <VerticalTableScoreboard matchDetails={matchDetails} matchData={matchData} scoreboardConfig={config.scoreboard} />
           <MatchupPresentation matchDetails={matchDetails} enabled={config.matchup.enabled} />
           <LowerThirdMatchup matchDetails={matchDetails} enabled={config.lowerThird.enabled} />
+          <SocialMediaLowerThird socialMediaConfig={config.socialMedia} />
           <TeamComparisonTable matchDetails={matchDetails} enabled={config.teamComparison.enabled} />
           <AfterMatchStats matchDetails={matchDetails} matchData={matchData} afterMatchConfig={config.afterMatch} />
           <SponsorsPanel sponsorsConfig={config.sponsors} />
@@ -287,6 +299,9 @@ function App() {
           </button>
           <button onClick={() => handleToggleComponent('lowerThird')}>
             Toggle LowerThird ({config.lowerThird.enabled.toString()})
+          </button>
+          <button onClick={() => handleToggleComponent('socialMedia')}>
+            Toggle SocialMedia ({config.socialMedia.enabled.toString()})
           </button>
           <button onClick={() => handleToggleComponent('teamComparison')}>
             Toggle TeamComparison ({config.teamComparison.enabled.toString()})
