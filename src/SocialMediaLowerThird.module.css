@@ -1,4 +1,29 @@
 /* src/SocialMediaLowerThird.module.css */
+.social-wrapper {
+    position: absolute;
+    top: 20px;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+
+    /* The key: Use auto margins to distribute the space equally */
+    margin: auto;
+    z-index: 100;
+    max-width: fit-content;
+    min-width: fit-content;
+    box-sizing: border-box;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    opacity: 0;
+}
+
+.fade-in {
+    opacity: 1;
+}
+
+.fade-out {
+    opacity: 0;
+}
+
 /* Position-specific styles now only update the edge constraints (top/bottom/left/right) */
 .top {
     top: 20px;
@@ -15,7 +40,8 @@
     left: 20px;
     right: auto;
     bottom: auto;
-    margin: 0; /* Remove auto margins to stick to the corner */
+    margin: 0;
+    /* Remove auto margins to stick to the corner */
 }
 
 .top-right {
@@ -49,120 +75,104 @@
     bottom: 0;
     left: 0;
     right: 0;
-    margin: auto; /* Keeps it perfectly centered */
+    margin: auto;
+    /* Keeps it perfectly centered */
 }
 
-.social-wrapper {
-  position: absolute;
-  z-index: 100;
-  max-width: 650px;
-  min-width: fit-content;
-  box-sizing: border-box;
-  transition: opacity 0.5s ease, transform 0.5s ease;
-  opacity: 0;
-}
-
-.fade-in {
-  opacity: 1;
-}
-
-.fade-out {
-  opacity: 0;
-}
 
 .social-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-  color: #ecf0f1;
-  font-family: Arial, sans-serif;
-  padding: 15px 20px;
-  border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-  gap: 20px;
-  /* border-left: 5px solid #3498db; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    color: #ecf0f1;
+    font-family: Arial, sans-serif;
+    padding: 15px 20px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    gap: 20px;
+    /* border-left: 5px solid #3498db; */
 }
 
 .icon-section {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
 }
 
 .network-icon {
-  width: 80px;
-  height: 80px;
-  object-fit: contain;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
 }
 
 .text-content {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  flex-grow: 1;
-  gap: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    flex-grow: 1;
+    gap: 8px;
 }
 
 .network-name {
-  font-size: 1.3rem;
-  font-weight: bold;
-  text-transform: uppercase;
-  color: #f1c40f;
-  letter-spacing: 1px;
-  line-height: 1;
+    font-size: 1.3rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #f1c40f;
+    letter-spacing: 1px;
+    line-height: 1;
 }
 
 .handle {
-  font-size: 1.1rem;
-  font-weight: 500;
-  color: #3498db;
-  letter-spacing: 0.5px;
-  white-space: nowrap;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #3498db;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
 }
 
 .cta {
-  font-size: 1rem;
-  font-weight: bold;
-  text-transform: uppercase;
-  color: #ecf0f1;
-  background: linear-gradient(90deg, #e74c3c 0%, #e67e22 100%);
-  padding: 6px 14px;
-  border-radius: 4px;
-  letter-spacing: 0.5px;
-  margin-top: 2px;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #ecf0f1;
+    background: linear-gradient(90deg, #e74c3c 0%, #e67e22 100%);
+    padding: 6px 14px;
+    border-radius: 4px;
+    letter-spacing: 0.5px;
+    margin-top: 2px;
 }
 
 .divider {
-  width: 2px;
-  height: 80px;
-  background-color: rgba(52, 152, 219, 0.3);
-  flex-shrink: 0;
+    width: 2px;
+    height: 80px;
+    background-color: rgba(52, 152, 219, 0.3);
+    flex-shrink: 0;
 }
 
 .indicator-dots {
-  display: flex;
-  gap: 8px;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
+    display: flex;
+    gap: 8px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
 }
 
 .dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background-color: rgba(236, 240, 241, 0.4);
-  transition: background-color 0.3s ease, transform 0.3s ease;
-  cursor: default;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: rgba(236, 240, 241, 0.4);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    cursor: default;
 }
 
 .dot.active {
-  background-color: #3498db;
-  transform: scale(1.3);
-  box-shadow: 0 0 8px rgba(52, 152, 219, 0.8);
+    background-color: #3498db;
+    transform: scale(1.3);
+    box-shadow: 0 0 8px rgba(52, 152, 219, 0.8);
 }
