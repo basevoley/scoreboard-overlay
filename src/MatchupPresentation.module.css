@@ -54,8 +54,8 @@
 }
 
 .competition-logo {
-  height: 40px;
-  width: auto;
+  max-height: 100px;
+  max-width: 100px;
   flex-shrink: 0; /* Prevents the image from shrinking */
 }
 

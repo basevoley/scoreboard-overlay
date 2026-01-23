@@ -319,7 +319,7 @@ function App() {
           </button>
         </div>
       )}
-      <OverlayProvider width={1280} height={720} connectionStatus={connectionStatus}>
+      <OverlayProvider width={1920} height={1080} connectionStatus={connectionStatus}>
         {connectionStatus === 'connecting' && <div className="connecting-animation">Conectando con el servidor de mensajería...</div>}
         {connectionStatus === 'handshake-pending' && <div className="connecting-animation">Conectado al servidor de mensajería. Comunicando con la aplicación de control...</div>}
         {connectionStatus === 'handshake-success' && <div className="success-message">Comunicación establecida!</div>}
