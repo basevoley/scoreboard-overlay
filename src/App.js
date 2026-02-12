@@ -1,5 +1,5 @@
 // src/App.js
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { OverlayProvider } from './contexts/OverlayContext';
 import Scoreboard from './Scoreboard';
 import VerticalTableScoreboard from './VerticalTableScoreboard';
@@ -11,6 +11,7 @@ import SocialMediaLowerThird from './SocialMediaLowerThird';
 import io from 'socket.io-client';
 import './App.css';
 import SponsorsPanel from './SponsorsPanel';
+import SubscribeAnimation from './SubscribeAnimation';
 
 const initialMatchDetails = {
   teams: { teamA: 'Equipo Local Demo', teamB: 'Equipo Visitante Demo' },
@@ -104,6 +105,10 @@ const initialConfig = {
       // Añade más URLs según sea necesario
     ], displayTime: 4000,
   },
+  subscribe: {
+    enabled: false,
+    position: 'center',
+  }
 };
 
 const SOCKET_SERVER_URL = process.env.REACT_APP_SOCKET_URL;
@@ -114,6 +119,12 @@ function App() {
 
   const [config, setConfig] = useState(null);
   const [connectionStatus, setConnectionStatus] = useState('disconnected'); // 'connecting', 'connected'
+  const statusRef = useRef('disconnected');
+
+  // 3. Keep the Ref in sync with state
+  useEffect(() => {
+    statusRef.current = connectionStatus;
+  }, [connectionStatus]);
 
 
   useEffect(() => {
@@ -136,6 +147,10 @@ function App() {
       });
 
       socketInstance.on('handshake-response', (data) => {
+        if (statusRef.current !== 'handshake-pending') {
+          console.warn('Ignored handshake-response: status is not handshake-pending');
+          return;
+        }
         console.log('Handshake response received:', data);
         setConnectionStatus('handshake-success');
         setTimeout(() => {
@@ -317,6 +332,18 @@ function App() {
           <button onClick={() => handleToggleComponent('sponsors')}>
             Toggle SponsorsPanel ({config.sponsors.enabled.toString()})
           </button>
+          <button onClick={() => handleToggleComponent('subscribe')}>
+            Toggle Subscribe ({config.subscribe.enabled.toString()})
+          </button>
+          <select id="subscribe-position-select" value={config.subscribe.position} onChange={(e) => handleSelectChange('subscribe', 'position', e.target.value)}>
+            <option value="top">Top</option>
+            <option value="top-left">Top Left</option>
+            <option value="top-right">Top Right</option>
+            <option value="bottom">Bottom</option>
+            <option value="bottom-right">Bottom Right</option>
+            <option value="bottom-left">Bottom Left</option>
+            <option value="center">Center</option>
+          </select>
         </div>
       )}
       <OverlayProvider width={1920} height={1080} connectionStatus={connectionStatus}>
@@ -334,6 +361,7 @@ function App() {
             <TeamComparisonTable matchDetails={matchDetails} enabled={config.teamComparison.enabled} />
             <AfterMatchStats matchDetails={matchDetails} matchData={matchData} afterMatchConfig={config.afterMatch} />
             <SponsorsPanel sponsorsConfig={config.sponsors} />
+            <SubscribeAnimation config={config.subscribe} />
           </>
         )}
       </OverlayProvider>

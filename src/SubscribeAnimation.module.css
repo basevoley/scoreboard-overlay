@@ -1,0 +1,117 @@
+/* YouTubeCTA.module.css */
+.overlay-wrapper {
+    --gap: 3cqi; /* Margen proporcional (equivale a ~20px en 1280px) */
+    
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+    max-width: 60cqi; /* El marcador no ocupará más del 60% del ancho del padre */
+    width: fit-content;
+    height: fit-content;
+    opacity: 0;
+    pointer-events: none;
+    
+    /* Transición suave de transform y opacity */
+    /* transition: 
+        opacity 0.1s ease-in-out, 
+        transform 0.1s cubic-bezier(0.2, 1, 0.3, 1); */
+}
+
+.hidden {
+  opacity: 0;
+  transform: scale(0.8);
+}
+
+.visible {
+  opacity: 1;
+  transform: scale(1);
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+/* --- POSICIONES DINÁMICAS --- */
+
+.top {
+    transform: translate(calc(50cqi - 50%), var(--gap));
+}
+
+.bottom {
+    transform: translate(calc(50cqi - 50%), calc(100cqh - 100% - var(--gap)));
+}
+
+.top-left {
+    transform: translate(var(--gap), var(--gap));
+}
+
+.top-right {
+    transform: translate(calc(100cqi - 100% - var(--gap)), var(--gap));
+}
+
+.bottom-left {
+    transform: translate(var(--gap), calc(100cqh - 100% - var(--gap)));
+}
+
+.bottom-right {
+    transform: translate(calc(100cqi - 100% - var(--gap)), calc(100cqh - 100% - var(--gap)));
+}
+
+.center {
+    transform: translate(calc(50cqi - 50%), calc(50cqh - 50%));
+}
+
+.overlayContainer {
+  position: relative;
+  width: 400px;
+  height: 100px;
+  background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin-top: 60px; /* Espacio para que el logo no se corte arriba */
+}
+
+.logoWrapper {
+  position: absolute;
+  top: -195px;
+  /* left: 50%; */
+  transform: translateX(-50%);
+  width: 200px;
+  height: 200px;
+  background-color: white;
+  border-radius: 50%;
+  border: 6px solid #3498db;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+  overflow: hidden;
+}
+
+.logoImage {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.icon {
+  font-size: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.subscribeBtn {
+  background-color: #ff0000;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 24px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
