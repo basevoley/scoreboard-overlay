@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import styles from "./SubscribeAnimation.module.css";
 import confetti from "canvas-confetti";
 
 const SubscribeAnimation = ({ config }) => {
   const { enabled, position } = config;
+  const containerRef = useRef(null);
   const cycleTime = 3;
   const animTime = 0.5;
 
@@ -16,17 +17,23 @@ const SubscribeAnimation = ({ config }) => {
   }, [enabled]);
 
   const launchSocialConfetti = () => {
+    if (!containerRef.current) return;
+
+        const rect = containerRef.current.getBoundingClientRect();
+    const x = (rect.left + rect.width / 2) / window.innerWidth;
+    const y = (rect.top + rect.height / 2) / window.innerHeight;
+
     confetti({
       particleCount: 80,
       spread: 180,
-      origin: { y: 0.6 },
+      origin: { x, y },
       colors: ["#FF0000", "#1DA1F2", "#E1306C", "#4267B2"],
       ticks: 200, // Cuánto tiempo permanecen en pantalla
     });
   };
 
   return (
-    <div className={`${styles['overlay-wrapper']} ${positionClass} ${enabled ? styles.visible : styles.hidden}`}>
+    <div ref={containerRef} className={`${styles['overlay-wrapper']} ${positionClass} ${enabled ? styles.visible : styles.hidden}`}>
       <div className={styles.overlayContainer}>
 
         <motion.div
@@ -34,7 +41,7 @@ const SubscribeAnimation = ({ config }) => {
           animate={{ scale: [1, 1.08, 1] }}
           transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
         >
-          <img src="cv_alcala.jpg" alt="YT" className={styles.logoImage} />
+          <img src="cv_alcala.jpg" alt="CV Alcala Logo" className={styles.logoImage} />
         </motion.div>
 
         <motion.div
