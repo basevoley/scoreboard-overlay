@@ -6,7 +6,7 @@
     top: 0;
     left: 0;
     margin: 0;
-    max-width: 60cqi; /* El marcador no ocupará más del 60% del ancho del padre */
+    min-width: 20cqi;
     width: fit-content;
     height: fit-content;
     opacity: 0;
