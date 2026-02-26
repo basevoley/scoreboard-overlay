@@ -89,14 +89,14 @@
 }
 
 .team-logo {
-  width: 30px;
-  height: 30px;
+  width: 2.3rem;
+  height: 2.3rem;
   border-radius: 50%;
   border: 1px solid #3498db;
 }
 
 .team-name {
-  font-size: 0.8rem;
+  font-size: 1rem;
   font-weight: bold;
   text-transform: uppercase;
 }
@@ -148,8 +148,8 @@
 }
 
 .timeout-indicator {
-  width: 6px;
-  height: 6px;
+  width: 0.5rem;
+  height: 0.5rem;
   background-color: #5d6d7e;
   border-radius: 50%;
   border: 1px solid #bdc3c7;

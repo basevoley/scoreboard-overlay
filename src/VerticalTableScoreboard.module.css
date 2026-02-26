@@ -136,15 +136,16 @@
 
 /* Timeout indicator styling */
 .timeout-indicator {
-  width: 6px;
-  height: 6px;
+  width: 0.6rem;
+  height: 0.6rem;
   background-color: #5d6d7e;
   border-radius: 50%;
   border: 1px solid #bdc3c7;
 }
 
 .timeout-indicator.used {
-  background-color: #bdc3c7;
+  background-color: #e74c3c;
+  border-color: #e74c3c;
 }
 
 /* Other cells */

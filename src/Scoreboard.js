@@ -16,7 +16,7 @@ const Scoreboard = ({ matchDetails, matchData, scoreboardConfig  }) => {
 
   const positionClass = scoreboardConfig.position ? styles[scoreboardConfig.position] : '';
   const isBottomPosition = scoreboardConfig.position && scoreboardConfig.position.startsWith('bottom');
-  const flipperContentSize = '32px';
+  const flipperContentSize = '2.3rem';
 
   const renderTimeouts = (timeoutsUsed) => {
     return [...Array(2)].map((_, index) => (
