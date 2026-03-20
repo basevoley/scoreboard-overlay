@@ -12,6 +12,7 @@ import io from 'socket.io-client';
 import './App.css';
 import SponsorsPanel from './SponsorsPanel';
 import SubscribeAnimation from './SubscribeAnimation';
+import Lineup from './Lineup';
 
 const initialMatchDetails = {
   teams: { teamA: 'Equipo Local Demo', teamB: 'Equipo Visitante Demo' },
@@ -36,6 +37,36 @@ const initialMatchDetails = {
       ranking: 0, competitionPoints: 0, matchesPlayed: 0, totalMatchesWon: 0, won3Points: 0, won2Points: 0, totalMatchesLost: 0, lost1Point: 0, lost0Points: 0, totalPointsScored: 0, totalPointsReceived: 0,
     }
   },
+  players: {
+    teamA: [
+      { number: 1, name: "playerA1" },
+      { number: 2, name: "playerA2" },
+      { number: 3, name: "playerA3" },
+      { number: 4, name: "playerA4" },
+      { number: 5, name: "playerA5" },
+      { number: 6, name: "playerA6" },
+      { number: 1, name: "playerA1" },
+      { number: 2, name: "playerA2" },
+      { number: 3, name: "playerA3" },
+      { number: 4, name: "playerA4" },
+      { number: 5, name: "playerA5" },
+      { number: 6, name: "playerA6" },
+    ],
+    teamB: [
+      { number: 1, name: "playerB1" },
+      { number: 2, name: "playerB2" },
+      { number: 3, name: "playerB3" },
+      { number: 4, name: "playerB4" },
+      { number: 5, name: "playerB5" },
+      { number: 6, name: "playerB6" },
+      { number: 7, name: "playerB1" },
+      { number: 2, name: "playerB2" },
+      { number: 3, name: "playerB3" },
+      { number: 4, name: "playerB4" },
+      { number: 5, name: "playerB5" },
+      { number: 6, name: "playerB6" },
+    ]
+  }
 };
 
 const initialMatchData = {
@@ -108,6 +139,10 @@ const initialConfig = {
   subscribe: {
     enabled: false,
     position: 'center',
+  },
+  lineup: {
+    enabled: false,
+    showStats: true,
   }
 };
 
@@ -344,6 +379,13 @@ function App() {
             <option value="bottom-left">Bottom Left</option>
             <option value="center">Center</option>
           </select>
+          <button onClick={() => handleToggleComponent('lineup')}>
+            Toggle Lineup ({config.lineup.enabled.toString()})
+          </button>
+          <button onClick={() => handleSelectChange('lineup', 'showStats', !config.lineup.showStats)}>
+            Toggle Lineup stats ({config.lineup.showStats.toString()})
+          </button>
+
         </div>
       )}
       <OverlayProvider width={1920} height={1080} connectionStatus={connectionStatus}>
@@ -362,6 +404,7 @@ function App() {
             <AfterMatchStats matchDetails={matchDetails} matchData={matchData} afterMatchConfig={config.afterMatch} />
             <SponsorsPanel sponsorsConfig={config.sponsors} />
             <SubscribeAnimation config={config.subscribe} />
+            <Lineup matchDetails={matchDetails} config={config.lineup} />
           </>
         )}
       </OverlayProvider>
