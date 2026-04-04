@@ -14,6 +14,8 @@ import SponsorsPanel from './SponsorsPanel';
 import SubscribeAnimation from './SubscribeAnimation';
 import Lineup from './Lineup';
 
+const SOCKET_SERVER_URL = process.env.REACT_APP_SOCKET_URL;
+
 const initialMatchDetails = {
   teams: { teamA: 'Equipo Local Demo', teamB: 'Equipo Visitante Demo' },
   teamLogos: {
@@ -110,11 +112,13 @@ const initialConfig = {
     enabled: false,
     position: 'top-left',
     channels: [
-      { network: 'YouTube', handle: 'YourChannelName', icon: 'https://upload.wikimedia.org/wikipedia/commons/e/ef/Youtube_logo.png' },
-      { network: 'TikTok', handle: 'YourTikTokHandle', icon: 'https://images.seeklogo.com/logo-png/34/2/tiktok-logo-png_seeklogo-340606.png' },
-      { network: 'Instagram', handle: 'YourInstagram', icon: 'https://upload.wikimedia.org/wikipedia/commons/a/ac/Instagram-Gradient-Logo-PNG.png' },
-      { network: 'Twitch', handle: 'YourTwitchChannel', icon: 'https://images.seeklogo.com/logo-png/44/2/twitch-new-logo-png_seeklogo-447573.png' },
-      { network: 'Facebook', handle: 'YourFacebook', icon: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Facebook_Logo_%282019%29.png/1200px-Facebook_Logo_%282019%29.png' },
+      { network: 'YouTube', handle: 'YourChannelName',    icon: `${SOCKET_SERVER_URL}/images/networks/Youtube_logo.png` },
+      { network: 'TikTok', handle: 'YourTikTokHandle',    icon: `${SOCKET_SERVER_URL}/images/networks/tiktok-logo.png`},
+      { network: 'Instagram', handle: 'YourInstagram',    icon: `${SOCKET_SERVER_URL}/images/networks/Instagram-Gradient-Logo.png` },
+      { network: 'Twitch', handle: 'YourTwitchChannel',   icon: `${SOCKET_SERVER_URL}/images/networks/twitch-logo.png` },
+      { network: 'Facebook', handle: 'YourFacebook',      icon: `${SOCKET_SERVER_URL}/images/networks/Facebook_Logo.png` },
+      { network: 'Web', handle: 'http://yourwebsite.com', icon: `${SOCKET_SERVER_URL}/images/networks/web.png` },
+      // { network: 'Web', handle: 'http://yourwebsite.com', icon: 'https://images.seeklogo.com/logo-png/44/2/web-icon-logo-png_seeklogo-446770.png' },
     ],
   },
   teamComparison: {
@@ -145,8 +149,6 @@ const initialConfig = {
     showStats: true,
   }
 };
-
-const SOCKET_SERVER_URL = process.env.REACT_APP_SOCKET_URL;
 
 function App() {
   const [matchDetails, setMatchDetails] = useState(null);

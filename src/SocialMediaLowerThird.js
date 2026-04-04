@@ -26,16 +26,16 @@ const SocialMediaLowerThird = ({ socialMediaConfig }) => {
   const { network, handle, icon } = currentChannel;
 
   // Determine call-to-action based on social network
-  // const getCTA = (network) => {
-  //   const network_lower = network.toLowerCase();
-  //   if (network_lower === 'twitch') {
-  //     return 'Síguenos y Suscríbete';
-  //   } else if (network_lower === 'youtube') {
-  //     return 'Like y Suscríbete';
-  //   } else {
-  //     return 'Síguenos';
-  //   }
-  // };
+  const getCTA = (network) => {
+    const network_lower = network.toLowerCase();
+    if (network_lower === 'web') {
+      return 'Visítanos';
+    // } else if (network_lower === 'youtube') {
+    //   return 'Like y Suscríbete';
+    } else {
+      return 'Síguenos';
+    }
+  };
 
   return (
     <div className={`${styles['social-wrapper']} ${positionClass} ${styles[animationClass]}`}>
@@ -49,10 +49,10 @@ const SocialMediaLowerThird = ({ socialMediaConfig }) => {
             {network}
           </div>
           <div className={styles['handle']}>
-            @{handle}
+            {handle}
           </div>
           <div className={styles['cta']}>
-            Síguenos
+            {getCTA(network)}
           </div>
         </div>
 
