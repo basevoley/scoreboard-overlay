@@ -1,0 +1,89 @@
+/* src/DroplinePanel.module.css */
+
+.dropline-panel {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%) var(--vertical-transform, translateY(0));
+  opacity: 0;
+  transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+  padding: 8px 12px;
+  background-color: #34495e;
+  border-radius: 6px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #ecf0f1;
+  font-family: Arial, sans-serif;
+  z-index: 10;
+  width: fit-content;
+  white-space: nowrap;
+}
+
+.on-top {
+  top: 100%;
+  margin-top: 5px;
+  --vertical-transform: translateY(-20px);
+}
+
+.on-bottom {
+  bottom: 100%;
+  margin-bottom: 5px;
+  --vertical-transform: translateY(20px);
+}
+
+.is-animated-in {
+  opacity: 1;
+  --vertical-transform: translateY(0);
+}
+
+.on-top::after {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 6px solid #34495e;
+}
+
+.on-bottom::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid #34495e;
+}
+
+.dropline-icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #ecf0f1;
+  padding: 3px;
+  border: 1px solid #61dafb;
+  object-fit: contain;
+}
+
+.text-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.text-line-1 {
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.text-line-2 {
+  font-size: 0.8rem;
+  color: #bdc3c7;
+}
