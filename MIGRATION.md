@@ -126,12 +126,14 @@ Mark tasks `[x]` when complete. Add notes under tasks as needed.
 > Last because it touches three projects simultaneously. Use strangler-fig rollout — no big-bang deployment.
 > Requires coordination with `volleyball-score-tracker` and `socketio-server`.
 
-- [ ] **socketio-server**: add relay for new `matchEvent` channel; keep dual-emitting on old `matchData` (with embedded event) simultaneously — no clients break yet
-- [ ] **volleyball-score-tracker**: emit on new `matchEvent` channel in addition to (then instead of) embedding in `matchData`
-- [ ] **scoreboard-overlay** (`useSocket.ts`): add `socket.on('matchEvent', ...)` listener; wire to a separate `matchEvent` state slot; update `ScoreboardRouter` and dropline to consume it
-- [ ] Verify dropline panel triggers correctly from the new channel
-- [ ] Remove embedded `matchEvent` from `matchData` type and state
-- [ ] Remove legacy dual-emit from `socketio-server` once all three projects are confirmed working
+- [x] **socketio-server**: add relay for new `matchEvent` channel
+- [x] **volleyball-score-tracker**: refactored `useBroadcast.ts` — `MatchEventPayload` type, removed `matchEvent` from `OverlayPayload`, emits `matchEvent` on dedicated channel; `buildMatchPayload` no longer embeds event
+- [x] **scoreboard-overlay** (`useSocket.ts`): added `socket.on('matchEvent', ...)` listener; `matchEvent` state slot; returns `matchEvent` + `setMatchEvent`
+- [x] **scoreboard-overlay** (`ScoreboardRouter.tsx`): accepts `matchEvent` prop; passes `matchEvent ?? NULL_EVENT` to `useDropline`
+- [x] **scoreboard-overlay** (`DevControls.tsx`): replaced `setMatchData` prop with `setMatchEvent`; `triggerMatchEvent` sets standalone event state
+- [x] **scoreboard-overlay** (`App.tsx`): passes `matchEvent` to `ScoreboardRouter`; passes `setMatchEvent` to `DevControls`
+- [x] Remove embedded `matchEvent` from `MatchData` type and `initialMatchData` mock
+- [x] Build verified clean (`✓ built in 1.60s`)
 
 ---
 

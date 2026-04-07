@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import io from 'socket.io-client';
 import { initialMatchDetails, initialMatchData, initialConfig } from '../mockData';
 import type { MatchDetails } from '../types/matchDetails';
-import type { MatchData } from '../types/matchData';
+import type { MatchData, MatchEvent } from '../types/matchData';
 import type { OverlayConfig } from '../types/config';
 
 const SOCKET_SERVER_URL = import.meta.env.VITE_SOCKET_URL as string;
@@ -11,6 +11,7 @@ export function useSocket() {
   const [matchDetails, setMatchDetails] = useState<MatchDetails | null>(null);
   const [matchData, setMatchData] = useState<MatchData | null>(null);
   const [config, setConfig] = useState<OverlayConfig | null>(null);
+  const [matchEvent, setMatchEvent] = useState<MatchEvent | null>(null);
   const [connectionStatus, setConnectionStatus] = useState('disconnected');
   const statusRef = useRef('disconnected');
 
@@ -68,6 +69,11 @@ export function useSocket() {
       setConfig(data);
     });
 
+    socket.on('matchEvent', (data: MatchEvent) => {
+      console.log('matchEvent received:', JSON.stringify(data));
+      setMatchEvent(data);
+    });
+
     socket.on('reload', () => {
       console.log('Reload received!');
       window.location.reload();
@@ -80,5 +86,5 @@ export function useSocket() {
     return () => { socket.disconnect(); };
   }, []);
 
-  return { matchDetails, matchData, config, setMatchData, setConfig, connectionStatus };
+  return { matchDetails, matchData, config, matchEvent, setMatchEvent, setConfig, connectionStatus };
 }

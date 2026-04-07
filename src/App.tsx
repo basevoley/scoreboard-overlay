@@ -23,7 +23,7 @@ if (!SOCKET_SERVER_URL) {
 }
 
 function App() {
-  const { matchDetails, matchData, config, setMatchData, setConfig, connectionStatus } = useSocket();
+  const { matchDetails, matchData, config, matchEvent, setMatchEvent, setConfig, connectionStatus } = useSocket();
 
   return (
     <>
@@ -31,7 +31,7 @@ function App() {
         <DevControls
           matchDetails={matchDetails}
           config={config}
-          setMatchData={setMatchData}
+          setMatchEvent={setMatchEvent}
           setConfig={setConfig}
         />
       )}
@@ -49,7 +49,7 @@ function App() {
         {matchData != null && config != null && matchDetails != null && (
           <>
             <ErrorBoundary name="ScoreboardRouter">
-              <ScoreboardRouter matchDetails={matchDetails} matchData={matchData} scoreboardConfig={config.scoreboard} />
+              <ScoreboardRouter matchDetails={matchDetails} matchData={matchData} scoreboardConfig={config.scoreboard} matchEvent={matchEvent} />
             </ErrorBoundary>
             <ErrorBoundary name="MatchupPresentation">
               <MatchupPresentation matchDetails={matchDetails} enabled={config.matchup.enabled} />

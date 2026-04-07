@@ -63,11 +63,6 @@ export const initialMatchData: MatchData = {
   statistics: { teamA: {}, teamB: {} },
   currentSetStats: { teamA: {}, teamB: {} },
   winner: null,
-  matchEvent: {
-    timestamp: Date.now(),
-    type: null,
-    details: null,
-  },
 };
 
 export const initialConfig: OverlayConfig = {

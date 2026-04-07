@@ -1,6 +1,6 @@
 import React from 'react';
 import type { MatchDetails } from '../types/matchDetails';
-import type { MatchData } from '../types/matchData';
+import type { MatchEvent } from '../types/matchData';
 import type { OverlayConfig } from '../types/config';
 
 const POSITIONS = ['top', 'top-left', 'top-right', 'bottom', 'bottom-right', 'bottom-left', 'center'];
@@ -8,16 +8,13 @@ const POSITIONS = ['top', 'top-left', 'top-right', 'bottom', 'bottom-right', 'bo
 interface DevControlsProps {
   matchDetails: MatchDetails;
   config: OverlayConfig;
-  setMatchData: React.Dispatch<React.SetStateAction<MatchData | null>>;
+  setMatchEvent: React.Dispatch<React.SetStateAction<MatchEvent | null>>;
   setConfig: React.Dispatch<React.SetStateAction<OverlayConfig | null>>;
 }
 
-const DevControls = ({ matchDetails, config, setMatchData, setConfig }: DevControlsProps) => {
+const DevControls = ({ matchDetails, config, setMatchEvent, setConfig }: DevControlsProps) => {
   const triggerMatchEvent = (eventType: string, eventDetails: { text: string; team: string }) => {
-    setMatchData((prev) => prev ? ({
-      ...prev,
-      matchEvent: { timestamp: Date.now(), type: eventType, details: eventDetails },
-    }) : prev);
+    setMatchEvent({ timestamp: Date.now(), type: eventType, details: eventDetails });
   };
 
   const toggleComponent = (key: keyof OverlayConfig) => {

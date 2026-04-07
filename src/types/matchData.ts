@@ -32,5 +32,4 @@ export interface MatchData {
   statistics: { teamA: MatchStats; teamB: MatchStats };
   currentSetStats: { teamA: MatchStats; teamB: MatchStats };
   winner: 'teamA' | 'teamB' | null;
-  matchEvent: MatchEvent;
 }
