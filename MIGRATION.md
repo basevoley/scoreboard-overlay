@@ -97,34 +97,18 @@ Mark tasks `[x]` when complete. Add notes under tasks as needed.
 
 ---
 
-## Phase 5 — Unified Theme System
-> Requires TypeScript for typed token contracts. Build static CSS layer first, then wire dynamic socket theming.
+## Phase 5 — Unified Theme System [-]
+> Superseded by Phase 7. Theme tokens belong in `overlaySetup` alongside social channels and sponsors.
+> The CSS variable layer (originally 5b) is carried into Phase 7 as sub-step 7d.
 
-### 5a — Static token layer
-- [ ] Create `src/theme/tokens.ts`: typed `theme` object with `colors`, `font`, `spacing`, `animation`, `radius`; values match current hardcoded hex values exactly (nothing breaks yet)
-- [ ] Create `src/theme/theme.css`: `:root { --color-primary: ...; }` — one variable per token
-- [ ] Create `src/theme/index.ts` re-exporting `theme`
-- [ ] Import `theme.css` once in `index.tsx`
-
-### 5b — Migrate CSS modules
-- [ ] Refactor `src/components/scoreboard/` `.module.css` files to use `var(--token)` instead of hardcoded values
-- [ ] Refactor `src/components/lower-thirds/` `.module.css` files
-- [ ] Refactor `src/components/panels/` `.module.css` files
-- [ ] Refactor `src/components/shared/` `.module.css` files
-- [ ] Refactor `src/App.css` and `src/index.css`
-
-### 5c — Dynamic socket theming
-- [ ] Add `theme` key to `OverlayConfig` type in `src/types/config.ts`
-- [ ] Add `applyTheme(theme: ThemeTokens)` in `useSocket.ts` that calls `document.documentElement.style.setProperty()` for each token
-- [ ] Call `applyTheme` on `handshake-response` and `updateConfig` events when a theme object is present
-- [ ] Keep `matchDetails.teamColors` as separate inline style concern — does not go through the theme system
-- [ ] Verify theme persists across socket reconnections (re-apply on reconnect)
+- [-] 5a — Static token layer
+- [-] 5b — Migrate CSS modules to `var(--token)`
+- [-] 5c — Dynamic socket theming via `updateConfig`
 
 ---
 
-## Phase 6 — matchEvent Data Model (Cross-Project)
-> Last because it touches three projects simultaneously. Use strangler-fig rollout — no big-bang deployment.
-> Requires coordination with `volleyball-score-tracker` and `socketio-server`.
+## Phase 6 — matchEvent Data Model (Cross-Project) ✅
+> Touches all three projects simultaneously. Strangler-fig rollout — no big-bang deployment.
 
 - [x] **socketio-server**: add relay for new `matchEvent` channel
 - [x] **volleyball-score-tracker**: refactored `useBroadcast.ts` — `MatchEventPayload` type, removed `matchEvent` from `OverlayPayload`, emits `matchEvent` on dedicated channel; `buildMatchPayload` no longer embeds event
@@ -134,6 +118,68 @@ Mark tasks `[x]` when complete. Add notes under tasks as needed.
 - [x] **scoreboard-overlay** (`App.tsx`): passes `matchEvent` to `ScoreboardRouter`; passes `setMatchEvent` to `DevControls`
 - [x] Remove embedded `matchEvent` from `MatchData` type and `initialMatchData` mock
 - [x] Build verified clean (`✓ built in 1.60s`)
+
+---
+
+## Phase 7 — overlaySetup: Broadcaster Identity & Appearance
+> Introduces `overlaySetup` as a dedicated socket channel carrying broadcaster-level static config —
+> social channels, sponsor images/timing, and theme tokens. Splits `Config`/`OverlayConfig` into
+> `RuntimeConfig` (live operator toggles, sent on every change) and `OverlaySetup` (set once per
+> broadcaster, sent at handshake and re-emitted only on explicit save from Ajustes tab).
+>
+> `updateConfig` becomes small and frequent (toggles/positions only).
+> `overlaySetup` is larger but emitted sparingly.
+>
+> Touches all three projects. Implement in order: server → overlay → tracker.
+
+### 7a — Type definitions (both projects)
+- [ ] Define `OverlaySetup` interface:
+  - `socialMedia: { channels: SocialChannel[] }`
+  - `sponsors: { imageUrls: string[]; displayTime: number }`
+  - `theme: ThemeTokens` (placeholder — empty object until 7d)
+- [ ] Define `RuntimeConfig`: current `Config` minus the static fields above
+  - `socialMedia` retains `{ enabled, position }`
+  - `sponsors` retains `{ enabled }`
+- [ ] Update `OverlayConfig` (overlay) and `Config` (tracker) to match the split
+- [ ] Split `initialConfig` into `initialRuntimeConfig` + `initialOverlaySetup` in both projects
+
+### 7b — Socket protocol (all three projects)
+- [ ] **socketio-server**: add `overlaySetup` relay handler
+- [ ] **volleyball-score-tracker** (`useBroadcast.ts`):
+  - `emit('updateConfig', runtimeConfig)` — runtime fields only, no channels/URLs/timing
+  - Include `overlaySetup` in `handshake-response` alongside `matchData`, `matchDetails`, `runtimeConfig`
+  - Add `emit('overlaySetup', overlaySetup)` path triggered by Ajustes save buttons
+- [ ] **scoreboard-overlay** (`useSocket.ts`):
+  - Add `overlaySetup` state slot + `socket.on('overlaySetup', ...)` listener
+  - Merge `runtimeConfig` + `overlaySetup` into a single `config` object before returning — panel components stay unchanged
+  - Update `handshake-response` handler to expect `runtimeConfig` + `overlaySetup` instead of monolithic `config`
+
+### 7c — Ajustes UI (volleyball-score-tracker)
+> Each section has its own "Guardar" button. Saving emits `overlaySetup` and persists to session storage.
+> Rows are reordered with up/down arrow buttons.
+
+- [ ] **"Redes Sociales" section** in `Settings.tsx`:
+  - Dynamic list; each row: network name + handle + icon URL text inputs + icon `<img>` preview + up/down arrows + delete
+  - "Añadir red social" button appends an empty row
+  - "Guardar" emits `overlaySetup` and persists to session
+- [ ] **"Patrocinadores" section** in `Settings.tsx`:
+  - Dynamic list; each row: image URL text input + `<img>` preview + up/down arrows + delete
+  - "Añadir patrocinador" button appends an empty row
+  - Rotation time field (number input, ms) outside the list
+  - "Guardar" emits `overlaySetup` and persists to session
+- [ ] **"Apariencia" section** in `Settings.tsx`: placeholder `Paper` with "Próximamente" — wired in 7d
+- [ ] Update `useSession.ts` to save/restore `overlaySetup` alongside existing session data
+- [ ] Add `overlaySetup` state + setter to `ConfigContext` (or a new dedicated context)
+
+### 7d — Theme tokens (Apariencia section)
+> Deferred until 7c is stable. Socket plumbing from 7b already carries the `theme` field.
+
+- [ ] Define `ThemeTokens` type: `colors` (primary, secondary, accent, background, text), `font`, `radius`, `animation`
+- [ ] **scoreboard-overlay**: `src/theme/tokens.ts` with defaults matching current hardcoded values; `src/theme/theme.css` with `:root` CSS custom properties; imported once in `index.tsx`
+- [ ] **scoreboard-overlay**: refactor all `.module.css` files to use `var(--token)` (scoreboard, lower-thirds, panels, shared, App.css, index.css)
+- [ ] **scoreboard-overlay** (`useSocket.ts`): call `applyTheme(overlaySetup.theme)` on every `overlaySetup` received — writes `document.documentElement.style.setProperty()` per token; `teamColors` remain in `matchDetails`
+- [ ] **volleyball-score-tracker** (`Settings.tsx`): replace "Apariencia" placeholder with color pickers per token
+- [ ] Verify theme re-applies correctly on socket reconnection
 
 ---
 
