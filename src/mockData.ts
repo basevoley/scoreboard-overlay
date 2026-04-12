@@ -1,7 +1,7 @@
 // src/mockData.ts — default data used when no socket key is present (dev mode)
 import type { MatchDetails } from './types/matchDetails';
 import type { MatchData } from './types/matchData';
-import type { OverlayConfig } from './types/config';
+import type { OverlayConfig, RuntimeConfig, OverlaySetup } from './types/config';
 
 const SOCKET_SERVER_URL = import.meta.env.VITE_SOCKET_URL as string;
 
@@ -65,13 +65,20 @@ export const initialMatchData: MatchData = {
   winner: null,
 };
 
-export const initialConfig: OverlayConfig = {
+export const initialRuntimeConfig: RuntimeConfig = {
   scoreboard: { enabled: false, showHistory: true, type: 'classic', position: 'top' },
   matchup: { enabled: false },
   lowerThird: { enabled: false },
+  socialMedia: { enabled: false, position: 'top-left' },
+  teamComparison: { enabled: false },
+  afterMatch: { enabled: false, showStats: true },
+  sponsors: { enabled: false },
+  subscribe: { enabled: false, position: 'center' },
+  lineup: { enabled: false, showStats: true },
+};
+
+export const initialOverlaySetup: OverlaySetup = {
   socialMedia: {
-    enabled: false,
-    position: 'top-left',
     channels: [
       { network: 'YouTube',   handle: 'YourChannelName',        icon: `${SOCKET_SERVER_URL}/images/networks/Youtube_logo.png` },
       { network: 'TikTok',    handle: 'YourTikTokHandle',       icon: `${SOCKET_SERVER_URL}/images/networks/tiktok-logo.png` },
@@ -81,13 +88,22 @@ export const initialConfig: OverlayConfig = {
       { network: 'Web',       handle: 'http://yourwebsite.com', icon: `${SOCKET_SERVER_URL}/images/networks/web.png` },
     ],
   },
-  teamComparison: { enabled: false },
-  afterMatch: { enabled: false, showStats: true },
   sponsors: {
-    enabled: false,
     imageUrls: ['sponsors-1.png', 'sponsors-2.png', 'sponsors-3.png'],
     displayTime: 4000,
   },
-  subscribe: { enabled: false, position: 'center' },
-  lineup: { enabled: false, showStats: true },
+  subscribe: {
+    logoUrl: 'cv_alcala.jpg',
+    callToActionText: 'SUSCRÍBETE',
+    buttonColor: '#ff0000',
+  },
+  theme: {},
+};
+
+// Merged convenience export for dev mode (no socket key).
+export const initialConfig: OverlayConfig = {
+  ...initialRuntimeConfig,
+  socialMedia: { ...initialRuntimeConfig.socialMedia, ...initialOverlaySetup.socialMedia },
+  sponsors: { ...initialRuntimeConfig.sponsors, ...initialOverlaySetup.sponsors },
+  subscribe: { ...initialRuntimeConfig.subscribe, ...initialOverlaySetup.subscribe },
 };

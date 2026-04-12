@@ -1,0 +1,33 @@
+/* Overlay theme — CSS custom properties with defaults.
+   Override at runtime via applyTheme() in useSocket.ts.
+   --ov-*-rgb variants hold space-separated RGB channels for rgba() derivations. */
+:root {
+  /* Panel backgrounds */
+  --ov-bg:         #34495e;
+  --ov-bg-alt:     #2c3e50;
+  --ov-bg-alt-rgb: 44 62 80;
+
+  /* Text */
+  --ov-text:       #ecf0f1;
+  --ov-text-rgb:   236 240 241;
+  --ov-text-muted: #bdc3c7;
+
+  /* Primary accent — borders, current score, active indicators */
+  --ov-primary:     #3498db;
+  --ov-primary-rgb: 52 152 219;
+
+  /* Accent — team name highlight, sets-won cell */
+  --ov-accent: #f1c40f;
+
+  /* Serving indicator */
+  --ov-serving: #2ecc71;
+
+  /* Table alternating rows */
+  --ov-row-odd:  #5d6d7e;
+  --ov-row-even: #3b4d61;
+
+  /* Typography, shape, motion */
+  --ov-font:   Arial, sans-serif;
+  --ov-radius: 8px;
+  --ov-anim:   0.5s;
+}

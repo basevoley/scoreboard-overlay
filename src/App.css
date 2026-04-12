@@ -43,9 +43,9 @@
   flex-direction: column;
   align-items: center;
   padding: 40px;
-  background-color: #34495e;
+  background-color: var(--ov-bg);
   min-height: 100vh;
-  color: #ecf0f1;
+  color: var(--ov-text);
 }
 
 h1 {

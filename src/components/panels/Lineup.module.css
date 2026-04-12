@@ -25,16 +25,16 @@
 
 /* Table wrapper to contain both header and body tables */
 .table-wrapper {
-  border-radius: 8px;
+  border-radius: var(--ov-radius);
   overflow: hidden;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .comparison-table {
   border-collapse: collapse;
-  background-color: #34495e;
-  color: #ecf0f1;
-  font-family: Arial, sans-serif;
+  background-color: var(--ov-bg);
+  color: var(--ov-text);
+  font-family: var(--ov-font);
   width: 100%;
   table-layout: fixed;
 }
@@ -51,27 +51,27 @@
 
 .empty-cell {
   min-width: 250px;
-  background-color: #34495e;
+  background-color: var(--ov-bg);
 }
 
 .team-logo {
   width: 200px;
   height: 200px;
   border-radius: 50%;
-  border: 3px solid #3498db;
+  border: 3px solid var(--ov-primary);
 }
 
 .team-name {
   font-size: 1.1rem;
   font-weight: bold;
   text-transform: uppercase;
-  color: #f1c40f;
+  color: var(--ov-accent);
 }
 
 .vs {
   font-size: 5rem;
   font-weight: bold;
-  background: linear-gradient(to bottom, #3498db 40%, #2ecc71);
+  background: linear-gradient(to bottom, var(--ov-primary) 40%, var(--ov-serving));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -150,11 +150,11 @@
 
 .stat-value { padding: 8px 15px; text-align: left; text-transform: uppercase; font-size: 1rem; font-weight: bold; }
 
-.stat-label { padding: 8px 15px; background-color: #34495e; font-size: 0.9rem; font-weight: 600; letter-spacing: 0.02rem; text-align: center; color: #ecf0f1; text-transform: uppercase; }
+.stat-label { padding: 8px 15px; background-color: var(--ov-bg); font-size: 0.9rem; font-weight: 600; letter-spacing: 0.02rem; text-align: center; color: var(--ov-text); text-transform: uppercase; }
 
-.comparison-table tbody tr:nth-child(odd) .stat-value { background-color: #5d6d7e; }
+.comparison-table tbody tr:nth-child(odd) .stat-value { background-color: var(--ov-row-odd); }
 
-.comparison-table tbody tr:nth-child(even) .stat-value { background-color: #3b4d61; }
+.comparison-table tbody tr:nth-child(even) .stat-value { background-color: var(--ov-row-even); }
 
 .empty-stat-content {
   border-left: 1px solid rgba(0, 0, 0, 0.2);

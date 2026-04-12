@@ -5,16 +5,16 @@
   left: 50%;
   transform: translateX(-50%) var(--vertical-transform, translateY(0));
   opacity: 0;
-  transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+  transition: transform var(--ov-anim) ease-out, opacity var(--ov-anim) ease-out;
   padding: 8px 12px;
-  background-color: #34495e;
-  border-radius: 6px;
+  background-color: var(--ov-bg);
+  border-radius: var(--ov-radius);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   display: flex;
   align-items: center;
   gap: 10px;
-  color: #ecf0f1;
-  font-family: Arial, sans-serif;
+  color: var(--ov-text);
+  font-family: var(--ov-font);
   z-index: 10;
   width: fit-content;
   white-space: nowrap;
@@ -47,7 +47,7 @@
   height: 0;
   border-left: 6px solid transparent;
   border-right: 6px solid transparent;
-  border-bottom: 6px solid #34495e;
+  border-bottom: 6px solid var(--ov-bg);
 }
 
 .on-bottom::after {
@@ -60,14 +60,14 @@
   height: 0;
   border-left: 6px solid transparent;
   border-right: 6px solid transparent;
-  border-top: 6px solid #34495e;
+  border-top: 6px solid var(--ov-bg);
 }
 
 .dropline-icon {
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background-color: #ecf0f1;
+  background-color: var(--ov-text);
   padding: 3px;
   border: 1px solid #61dafb;
   object-fit: contain;
@@ -85,5 +85,5 @@
 
 .text-line-2 {
   font-size: 0.8rem;
-  color: #bdc3c7;
+  color: var(--ov-text-muted);
 }

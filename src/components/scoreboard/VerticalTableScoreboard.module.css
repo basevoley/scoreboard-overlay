@@ -31,9 +31,9 @@
 .center       { transform: translate(calc(50cqi - 50%), calc(50cqh - 50%)); }
 
 .scoreboard-table {
-  font-family: Arial, sans-serif;
-  color: #ecf0f1;
-  background-color: #2c3e50;
+  font-family: var(--ov-font);
+  color: var(--ov-text);
+  background-color: var(--ov-bg-alt);
   border-radius: 6px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   overflow: hidden;
@@ -45,7 +45,7 @@
 .scoreboard-table td {
   padding: 4px 8px;
   text-align: center;
-  border-right: 1px solid #34495e;
+  border-right: 1px solid var(--ov-bg);
   vertical-align: middle;
 }
 
@@ -53,7 +53,7 @@
   width: 2.1rem;
   height: 2.1rem;
   border-radius: 50%;
-  border: 1px solid #3498db;
+  border: 1px solid var(--ov-primary);
 }
 
 .team-name {
@@ -88,7 +88,7 @@
   height: 0;
   border-top: 7px solid transparent;
   border-bottom: 7px solid transparent;
-  border-right: 15px solid #2ecc71;
+  border-right: 15px solid var(--ov-serving);
   margin-left: 3px;
 }
 
@@ -105,9 +105,9 @@
 .timeout-indicator {
   width: 0.6rem;
   height: 0.6rem;
-  background-color: #5d6d7e;
+  background-color: var(--ov-row-odd);
   border-radius: 50%;
-  border: 1px solid #bdc3c7;
+  border: 1px solid var(--ov-text-muted);
 }
 
 .timeout-indicator.used {
@@ -118,8 +118,8 @@
 .scoreboard-table td.sets-won-cell {
   font-weight: bold;
   font-size: 0.9rem;
-  color: #2c3e50;
-  background-color: #f1c40f;
+  color: var(--ov-bg-alt);
+  background-color: var(--ov-accent);
   width: 30px;
 }
 
@@ -127,7 +127,7 @@
   padding: 4px 0;
   overflow: hidden;
   position: relative;
-  border-right: 1px solid #34495e;
+  border-right: 1px solid var(--ov-bg);
   transition:
     max-width 0.5s cubic-bezier(0.4, 0, 0.2, 1),
     padding 0.5s cubic-bezier(0.4, 0, 0.2, 1),
@@ -162,8 +162,8 @@
 .scoreboard-table td.current-score-cell {
   font-weight: bold;
   font-size: 1.2rem;
-  color: #ecf0f1;
-  background-color: #3498db;
+  color: var(--ov-text);
+  background-color: var(--ov-primary);
   border-right: none;
   width: 30px;
 }

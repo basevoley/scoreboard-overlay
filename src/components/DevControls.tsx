@@ -1,7 +1,7 @@
 import React from 'react';
 import type { MatchDetails } from '../types/matchDetails';
 import type { MatchEvent } from '../types/matchData';
-import type { OverlayConfig } from '../types/config';
+import type { OverlayConfig, RuntimeConfig } from '../types/config';
 
 const POSITIONS = ['top', 'top-left', 'top-right', 'bottom', 'bottom-right', 'bottom-left', 'center'];
 
@@ -9,7 +9,7 @@ interface DevControlsProps {
   matchDetails: MatchDetails;
   config: OverlayConfig;
   setMatchEvent: React.Dispatch<React.SetStateAction<MatchEvent | null>>;
-  setConfig: React.Dispatch<React.SetStateAction<OverlayConfig | null>>;
+  setConfig: React.Dispatch<React.SetStateAction<RuntimeConfig | null>>;
 }
 
 const DevControls = ({ matchDetails, config, setMatchEvent, setConfig }: DevControlsProps) => {
@@ -17,17 +17,17 @@ const DevControls = ({ matchDetails, config, setMatchEvent, setConfig }: DevCont
     setMatchEvent({ timestamp: Date.now(), type: eventType, details: eventDetails });
   };
 
-  const toggleComponent = (key: keyof OverlayConfig) => {
+  const toggleComponent = (key: keyof RuntimeConfig) => {
     setConfig((prev) => prev ? ({
       ...prev,
       [key]: { ...(prev[key] as object), enabled: !(prev[key] as { enabled: boolean }).enabled },
     }) : prev);
   };
 
-  const setSection = <S extends keyof OverlayConfig, K extends keyof OverlayConfig[S]>(
+  const setSection = <S extends keyof RuntimeConfig, K extends keyof RuntimeConfig[S]>(
     section: S,
     key: K,
-    value: OverlayConfig[S][K],
+    value: RuntimeConfig[S][K],
   ) => {
     setConfig((prev) => prev ? ({
       ...prev,
@@ -35,11 +35,15 @@ const DevControls = ({ matchDetails, config, setMatchEvent, setConfig }: DevCont
     }) : prev);
   };
 
-  const PositionSelect = ({ id, section }: { id: string; section: keyof OverlayConfig }) => (
+  const setPosition = (section: keyof RuntimeConfig, value: string) => {
+    setConfig(prev => prev ? ({ ...prev, [section]: { ...prev[section], position: value } }) : prev);
+  };
+
+  const PositionSelect = ({ id, section }: { id: string; section: keyof RuntimeConfig }) => (
     <select
       id={id}
       value={(config[section] as { position: string }).position}
-      onChange={(e) => setSection(section, 'position' as keyof OverlayConfig[typeof section], e.target.value as OverlayConfig[typeof section][keyof OverlayConfig[typeof section]])}
+      onChange={(e) => setPosition(section, e.target.value)}
     >
       {POSITIONS.map((p) => <option key={p} value={p}>{p}</option>)}
     </select>

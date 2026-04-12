@@ -22,6 +22,12 @@ const SubscribeAnimation = ({ config }: SubscribeAnimationProps) => {
   const launchSocialConfetti = () => {
     if (!containerRef.current) return;
     const rect = containerRef.current.getBoundingClientRect();
+    const style = getComputedStyle(document.documentElement);
+    const colors = [
+      style.getPropertyValue('--ov-bg').trim(),
+      style.getPropertyValue('--ov-accent').trim(),
+      style.getPropertyValue('--ov-primary').trim(),
+    ].filter(Boolean);
     confetti({
       particleCount: 80,
       spread: 180,
@@ -29,7 +35,7 @@ const SubscribeAnimation = ({ config }: SubscribeAnimationProps) => {
         x: (rect.left + rect.width / 2) / window.innerWidth,
         y: (rect.top + rect.height / 2) / window.innerHeight,
       },
-      colors: ['#FF0000', '#1DA1F2', '#E1306C', '#4267B2'],
+      colors: colors.length === 3 ? colors : ['#FF0000', '#1DA1F2', '#E1306C', '#4267B2'],
       ticks: 200,
     });
   };
@@ -42,7 +48,7 @@ const SubscribeAnimation = ({ config }: SubscribeAnimationProps) => {
           animate={{ scale: [1, 1.08, 1] }}
           transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
         >
-          <img src="cv_alcala.jpg" alt="CV Alcala Logo" className={styles.logoImage} />
+          <img src={config.logoUrl} alt="Channel Logo" className={styles.logoImage} />
         </motion.div>
 
         <motion.div
@@ -57,10 +63,11 @@ const SubscribeAnimation = ({ config }: SubscribeAnimationProps) => {
 
         <motion.button
           className={styles.subscribeBtn}
+          style={{ backgroundColor: config.buttonColor }}
           animate={{ scale: [1, 0.85, 1.1, 1] }}
           transition={{ duration: animTime, repeat: Infinity, repeatDelay: cycleTime - animTime, delay: 1.5 }}
         >
-          SUSCRÍBETE
+          {config.callToActionText}
         </motion.button>
 
         <motion.div

@@ -7,7 +7,7 @@
   transform: translate(-50%, -50%);
   z-index: 100;
   margin: 0 auto;
-  transition: opacity 0.5s ease, transform 0.5s ease;
+  transition: opacity var(--ov-anim) ease, transform var(--ov-anim) ease;
   opacity: 0;
 }
 
@@ -26,11 +26,11 @@
 .info-header {
   text-align: center;
   margin-bottom: 10px;
-  border-radius: 8px;
+  border-radius: var(--ov-radius);
   padding: 10px;
   display: flex;
   gap: 20px;
-  background-color: #34495e;
+  background-color: var(--ov-bg);
 }
 
 .competition-logo {
@@ -45,27 +45,27 @@
   font-size: 1.2rem;
   font-weight: bold;
   text-transform: uppercase;
-  color: #ecf0f1;
+  color: var(--ov-text);
 }
 
 .category {
   font-size: 1rem;
   font-weight: normal;
-  color: #bdc3c7;
+  color: var(--ov-text-muted);
 }
 
 /* Table wrapper to contain both header and body tables */
 .table-wrapper {
-  border-radius: 8px;
+  border-radius: var(--ov-radius);
   overflow: hidden;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .after-match-table {
   border-collapse: collapse;
-  background-color: #2c3e50;
-  color: #ecf0f1;
-  font-family: Arial, sans-serif;
+  background-color: var(--ov-bg-alt);
+  color: var(--ov-text);
+  font-family: var(--ov-font);
   width: 100%;
   table-layout: fixed;
 }
@@ -80,14 +80,14 @@
 }
 
 .winner {
-  background-color: #f1c40f;
-  color: #3b4d61;
+  background-color: var(--ov-accent);
+  color: var(--ov-row-even);
 }
 
 .empty-cell {
   min-width: 250px;
-  background-color: #34495e;
-  color: #f1c40f;
+  background-color: var(--ov-bg);
+  color: var(--ov-accent);
   font-weight: bolder;
   font-size: 1.5rem;
 }
@@ -151,19 +151,19 @@
 .final-score {
   font-size: 2.5rem;
   font-weight: bold;
-  color: #ecf0f1;
+  color: var(--ov-text);
   margin-top: 5px;
 }
 
 .final-score > .winner {
-  color: #f1c40f;
-  background-color: #34495e;
+  color: var(--ov-accent);
+  background-color: var(--ov-bg);
 }
 
 .set-scores {
   margin-top: 15px;
   font-size: 1rem;
-  color: #bdc3c7;
+  color: var(--ov-text-muted);
   display: flex;
   justify-content: space-evenly;
   flex-direction: column;
@@ -177,7 +177,7 @@
 
 .set-winner {
   font-weight: bold;
-  color: #f1c40f;
+  color: var(--ov-accent);
 }
 
 .set-scores div:last-child {
@@ -185,8 +185,8 @@
 }
 
 .current-score {
-  background-color: #3498db;
-  color: #ecf0f1;
+  background-color: var(--ov-primary);
+  color: var(--ov-text);
   padding: 5px;
   border-radius: 2px;
 }
@@ -240,8 +240,8 @@
 
 .stat-value { padding: 8px 15px; text-align: center; font-size: 1rem; font-weight: bold; }
 
-.stat-label { padding: 8px 15px; background-color: #34495e; font-size: 0.9rem; font-weight: 600; letter-spacing: 0.02rem; text-align: center; color: #ecf0f1; text-transform: uppercase; }
+.stat-label { padding: 8px 15px; background-color: var(--ov-bg); font-size: 0.9rem; font-weight: 600; letter-spacing: 0.02rem; text-align: center; color: var(--ov-text); text-transform: uppercase; }
 
-.after-match-table tbody tr:nth-child(odd) .stat-value { background-color: #5d6d7e; }
+.after-match-table tbody tr:nth-child(odd) .stat-value { background-color: var(--ov-row-odd); }
 
-.after-match-table tbody tr:nth-child(even) .stat-value { background-color: #3b4d61; }
+.after-match-table tbody tr:nth-child(even) .stat-value { background-color: var(--ov-row-even); }

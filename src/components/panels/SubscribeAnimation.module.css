@@ -24,48 +24,26 @@
   transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-/* --- POSICIONES DINÁMICAS --- */
-
-.top {
-    transform: translate(calc(50cqi - 50%), var(--gap));
-}
-
-.bottom {
-    transform: translate(calc(50cqi - 50%), calc(100cqh - 100% - var(--gap)));
-}
-
-.top-left {
-    transform: translate(var(--gap), var(--gap));
-}
-
-.top-right {
-    transform: translate(calc(100cqi - 100% - var(--gap)), var(--gap));
-}
-
-.bottom-left {
-    transform: translate(var(--gap), calc(100cqh - 100% - var(--gap)));
-}
-
-.bottom-right {
-    transform: translate(calc(100cqi - 100% - var(--gap)), calc(100cqh - 100% - var(--gap)));
-}
-
-.center {
-    transform: translate(calc(50cqi - 50%), calc(50cqh - 50%));
-}
+.top    { transform: translate(calc(50cqi - 50%), var(--gap)); }
+.bottom { transform: translate(calc(50cqi - 50%), calc(100cqh - 100% - var(--gap))); }
+.top-left     { transform: translate(var(--gap), var(--gap)); }
+.top-right    { transform: translate(calc(100cqi - 100% - var(--gap)), var(--gap)); }
+.bottom-left  { transform: translate(var(--gap), calc(100cqh - 100% - var(--gap))); }
+.bottom-right { transform: translate(calc(100cqi - 100% - var(--gap)), calc(100cqh - 100% - var(--gap))); }
+.center       { transform: translate(calc(50cqi - 50%), calc(50cqh - 50%)); }
 
 .overlayContainer {
   position: relative;
   width: 400px;
   height: 100px;
-  background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+  background: linear-gradient(135deg, var(--ov-bg-alt) 0%, var(--ov-bg) 100%);
   border-radius: 15px;
   display: flex;
   align-items: center;
   justify-content: space-around;
   padding: 0 20px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: var(--ov-font);
   margin-top: 60px;
 }
 
@@ -77,7 +55,7 @@
   height: 200px;
   background-color: white;
   border-radius: 50%;
-  border: 6px solid #3498db;
+  border: 6px solid var(--ov-primary);
   display: flex;
   align-items: center;
   justify-content: center;

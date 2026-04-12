@@ -132,54 +132,56 @@ Mark tasks `[x]` when complete. Add notes under tasks as needed.
 >
 > Touches all three projects. Implement in order: server → overlay → tracker.
 
-### 7a — Type definitions (both projects)
-- [ ] Define `OverlaySetup` interface:
+### 7a — Type definitions (both projects) ✅
+- [x] Define `OverlaySetup` interface:
   - `socialMedia: { channels: SocialChannel[] }`
   - `sponsors: { imageUrls: string[]; displayTime: number }`
   - `theme: ThemeTokens` (placeholder — empty object until 7d)
-- [ ] Define `RuntimeConfig`: current `Config` minus the static fields above
+- [x] Define `RuntimeConfig`: current `Config` minus the static fields above
   - `socialMedia` retains `{ enabled, position }`
   - `sponsors` retains `{ enabled }`
-- [ ] Update `OverlayConfig` (overlay) and `Config` (tracker) to match the split
-- [ ] Split `initialConfig` into `initialRuntimeConfig` + `initialOverlaySetup` in both projects
+- [x] Update `OverlayConfig` (overlay) and `Config` (tracker) to match the split
+- [x] Split `initialConfig` into `initialRuntimeConfig` + `initialOverlaySetup` in both projects
 
-### 7b — Socket protocol (all three projects)
-- [ ] **socketio-server**: add `overlaySetup` relay handler
-- [ ] **volleyball-score-tracker** (`useBroadcast.ts`):
+### 7b — Socket protocol (all three projects) ✅
+- [x] **socketio-server**: add `overlaySetup` relay handler
+- [x] **volleyball-score-tracker** (`useBroadcast.ts`):
   - `emit('updateConfig', runtimeConfig)` — runtime fields only, no channels/URLs/timing
   - Include `overlaySetup` in `handshake-response` alongside `matchData`, `matchDetails`, `runtimeConfig`
   - Add `emit('overlaySetup', overlaySetup)` path triggered by Ajustes save buttons
-- [ ] **scoreboard-overlay** (`useSocket.ts`):
+- [x] **scoreboard-overlay** (`useSocket.ts`):
   - Add `overlaySetup` state slot + `socket.on('overlaySetup', ...)` listener
   - Merge `runtimeConfig` + `overlaySetup` into a single `config` object before returning — panel components stay unchanged
   - Update `handshake-response` handler to expect `runtimeConfig` + `overlaySetup` instead of monolithic `config`
 
-### 7c — Ajustes UI (volleyball-score-tracker)
+### 7c — Ajustes UI (volleyball-score-tracker) ✅
 > Each section has its own "Guardar" button. Saving emits `overlaySetup` and persists to session storage.
 > Rows are reordered with up/down arrow buttons.
 
-- [ ] **"Redes Sociales" section** in `Settings.tsx`:
+- [x] **"Redes Sociales" section** in `Settings.tsx`:
   - Dynamic list; each row: network name + handle + icon URL text inputs + icon `<img>` preview + up/down arrows + delete
   - "Añadir red social" button appends an empty row
-  - "Guardar" emits `overlaySetup` and persists to session
-- [ ] **"Patrocinadores" section** in `Settings.tsx`:
+  - "Guardar" enabled only when there are unsaved changes
+- [x] **"Patrocinadores" section** in `Settings.tsx`:
   - Dynamic list; each row: image URL text input + `<img>` preview + up/down arrows + delete
   - "Añadir patrocinador" button appends an empty row
   - Rotation time field (number input, ms) outside the list
-  - "Guardar" emits `overlaySetup` and persists to session
-- [ ] **"Apariencia" section** in `Settings.tsx`: placeholder `Paper` with "Próximamente" — wired in 7d
-- [ ] Update `useSession.ts` to save/restore `overlaySetup` alongside existing session data
-- [ ] Add `overlaySetup` state + setter to `ConfigContext` (or a new dedicated context)
+  - "Guardar" enabled only when there are unsaved changes
+- [x] **"Apariencia" section** in `Settings.tsx`: placeholder with "Próximamente" — wired in 7d
+- [x] Update `useSession.ts` to save/restore `overlaySetup` alongside existing session data
+- [x] Add `overlaySetup` state + setter to `ConfigContext`
 
-### 7d — Theme tokens (Apariencia section)
-> Deferred until 7c is stable. Socket plumbing from 7b already carries the `theme` field.
+### 7d — Theme tokens (Apariencia section) ✅
 
-- [ ] Define `ThemeTokens` type: `colors` (primary, secondary, accent, background, text), `font`, `radius`, `animation`
-- [ ] **scoreboard-overlay**: `src/theme/tokens.ts` with defaults matching current hardcoded values; `src/theme/theme.css` with `:root` CSS custom properties; imported once in `index.tsx`
-- [ ] **scoreboard-overlay**: refactor all `.module.css` files to use `var(--token)` (scoreboard, lower-thirds, panels, shared, App.css, index.css)
-- [ ] **scoreboard-overlay** (`useSocket.ts`): call `applyTheme(overlaySetup.theme)` on every `overlaySetup` received — writes `document.documentElement.style.setProperty()` per token; `teamColors` remain in `matchDetails`
-- [ ] **volleyball-score-tracker** (`Settings.tsx`): replace "Apariencia" placeholder with color pickers per token
-- [ ] Verify theme re-applies correctly on socket reconnection
+- [x] Define `ThemeTokens` type: `colors` (background, text, secondary, primary, accent, serving), `font`, `radius`, `animation`; plus `ThemeColors` interface in both projects
+- [x] **scoreboard-overlay**: `src/theme/tokens.ts` with `applyTheme()` writing CSS custom properties; `src/theme/theme.css` with `:root` defaults; imported in `index.tsx`
+- [x] **scoreboard-overlay**: all `.module.css` files refactored to use `var(--ov-*)` tokens — colors, font, radius, transition durations; RGB-channel variants (`--ov-primary-rgb`, `--ov-text-rgb`) for rgba() derivations via `rgb(var(--ov-X-rgb) / alpha)` syntax
+- [x] **scoreboard-overlay** (`useSocket.ts`): `applyTheme(overlaySetup.theme)` called on handshake-response, overlaySetup event, and mock-data path
+- [x] **volleyball-score-tracker** (`Settings.tsx`): "Apariencia" accordion now renders 6 color pickers (native `<input type="color">` + hex text field), font dropdown (8 web-safe fonts), save + reset buttons with isDirty guard
+- [x] **volleyball-score-tracker** (`App.tsx`): lazy-loaded tab components (`React.lazy` + `Suspense`) to defer large vendor chunks; `manualChunks` in vite.config.ts splits react, MUI, pdf, excel, charts, icons, socket into separate cached bundles
+- [x] **volleyball-score-tracker** (`useImagePreloader.ts`): new hook preloads 118 static badge images once on mount, team logos + competition logo on matchDetails change, sponsor URLs + social icons on overlaySetup change — prevents re-download on badge selector open and panel mount
+- [x] **scoreboard-overlay** (`useSocket.ts`): `preloadOverlayImages()` warms browser cache with sponsor and social icon URLs on handshake-response and every overlaySetup event
+- [x] **Both projects**: `OverlaySetup` extended with `subscribe: { logoUrl, callToActionText, buttonColor }`; `SubscribeAnimation` reads from config instead of hardcoded values; `SubscribeSection` added to Ajustes tab; session storage bumped to v4 with migration
 
 ---
 
