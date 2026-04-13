@@ -26,7 +26,7 @@ const AfterMatchStats = ({ matchDetails, matchData, afterMatchConfig }: AfterMat
   const { isVisible, animationClass } = useComponentVisibility(afterMatchConfig.enabled, 500);
   if (!isVisible) return null;
 
-  const { statistics, currentSetStats, winner, setsWon, setScores, scores, matchStarted } = matchData;
+  const { statistics, currentSetStats, winner, setsWon, setScores, scores, matchPhase } = matchData;
   const { matchHeader, competitionLogo, extendedInfo } = matchDetails;
 
   return (
@@ -57,7 +57,7 @@ const AfterMatchStats = ({ matchDetails, matchData, afterMatchConfig }: AfterMat
                 </th>
                 <th className={styles['empty-cell']}>
                   <div>
-                    <span>{winner ? 'FINAL' : (matchStarted ? 'TIEMPO MUERTO' : 'DESCANSO')}</span>
+                    <span>{winner ? 'FINAL' : (matchPhase === 'in-progress' ? 'TIEMPO MUERTO' : 'DESCANSO')}</span>
                     {!winner && (<><br /><span>{'SET ' + (setScores.length + 1)}</span></>)}
                     <div className={styles['final-score']}>
                       <span className={winner === 'teamA' ? styles['winner'] : ''}>{setsWon.teamA}</span>

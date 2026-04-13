@@ -21,13 +21,19 @@ export interface MatchStats {
   [key: string]: number | undefined;
 }
 
+export interface SetStatsEntry {
+  scores: SetScore;
+  statistics: { teamA: MatchStats; teamB: MatchStats };
+}
+
 export interface MatchData {
   scores: { teamA: number; teamB: number };
   setsWon: { teamA: number; teamB: number };
   setScores: SetScore[];
+  setStats: SetStatsEntry[];
   currentServer: 'teamA' | 'teamB' | null;
   ballPossession: 'teamA' | 'teamB' | null;
-  matchStarted: boolean;
+  matchPhase: 'pre-match' | 'in-progress' | 'between-sets' | 'ended';
   timeouts: { teamA: number; teamB: number };
   statistics: { teamA: MatchStats; teamB: MatchStats };
   currentSetStats: { teamA: MatchStats; teamB: MatchStats };
