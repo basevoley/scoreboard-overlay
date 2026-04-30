@@ -68,6 +68,8 @@
   height: 2.1rem;
   border-radius: 50%;
   border: 1px solid var(--ov-primary);
+  background-color: white;
+  object-fit: contain;
 }
 
 .team-name {

@@ -35,7 +35,7 @@ const AfterMatchStats = ({ matchDetails, matchData, afterMatchConfig }: AfterMat
         <div className={styles['info-header']}>
           <div className={styles['competition-logo']}>
             {competitionLogo && (
-              <img src={competitionLogo} alt="Competition Logo" className={styles['competition-logo-img']} style={{ backgroundColor: '#bdc3c7', padding: '5px' }} />
+              <img src={competitionLogo} alt="Competition Logo" className={styles['competition-logo-img']} /*style={{ backgroundColor: '#bdc3c7', padding: '5px' }}*/ />
             )}
           </div>
           <div style={{ width: '100%' }}>

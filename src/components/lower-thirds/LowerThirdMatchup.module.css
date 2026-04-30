@@ -51,6 +51,8 @@
   height: 100%;
   border-radius: 50%;
   border: 2px solid var(--ov-primary);
+  background-color: white;
+  object-fit: contain;
 }
 
 .text-content {
@@ -117,7 +119,8 @@
 }
 
 .competition-logo-img {
-  height: 15px;
-  background-color: var(--ov-text-muted);
+  height: 25px;
+  /* background-color: var(--ov-text-muted); */
   padding: 2px;
+  filter: brightness(0.5) grayscale(1) invert(1);
 }

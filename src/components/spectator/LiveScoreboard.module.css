@@ -78,8 +78,9 @@
 .teamLogo {
   width: 56px;
   height: 56px;
-  object-fit: contain;
   border-radius: 50%;
+  background-color: white;
+  object-fit: contain;
 }
 
 .jerseyBadge {

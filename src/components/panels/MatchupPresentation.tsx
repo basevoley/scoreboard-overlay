@@ -34,7 +34,7 @@ const MatchupPresentation = ({ matchDetails, enabled }: MatchupPresentationProps
           <div className={styles['vs-container']}>
             <span className={styles['vs']}>vs</span>
             {competitionLogo && (
-              <img src={competitionLogo} alt="Competition Logo" className={styles['competition-logo']} style={{ backgroundColor: '#bdc3c7', padding: '5px' }} />
+              <img src={competitionLogo} alt="Competition Logo" className={styles['competition-logo']} /* style={{ backgroundColor: '#bdc3c7', padding: '5px' }} */ />
             )}
           </div>
           <div className={styles['team']}>

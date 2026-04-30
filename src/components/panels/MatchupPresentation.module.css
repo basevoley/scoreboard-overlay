@@ -52,8 +52,10 @@
 
 .competition-logo {
   max-height: 100px;
-  max-width: 100px;
+  max-width: 200px;
   flex-shrink: 0;
+  /* filter: brightness(0) invert(1); */
+  filter: brightness(0.5) grayscale(1) invert(1);
 }
 
 .competition {
@@ -132,6 +134,8 @@
   width: 200px;
   height: 200px;
   border-radius: 50%;
+  background-color: white;
+  object-fit: contain;
 }
 
 .team-name {
