@@ -2,7 +2,7 @@
 
 .matchup-wrapper {
   z-index: 100;
-  position: fixed;
+  position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -94,7 +94,7 @@
   align-items: center;
   gap: 10px;
   flex: 1;
-  width: 300px;
+  /* width: 300px; */
 }
 
 .logo-container {

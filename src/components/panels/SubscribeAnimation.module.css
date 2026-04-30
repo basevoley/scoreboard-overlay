@@ -11,6 +11,8 @@
     height: fit-content;
     opacity: 0;
     pointer-events: none;
+      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
 }
 
 .hidden {
@@ -21,7 +23,6 @@
 .visible {
   opacity: 1;
   transform: scale(1);
-  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .top    { transform: translate(calc(50cqi - 50%), var(--gap)); }
