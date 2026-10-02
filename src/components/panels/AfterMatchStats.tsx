@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './AfterMatchStats.module.css';
 import useComponentVisibility from '../../hooks/useComponentVisibility';
+import PanelHeader from '../shared/PanelHeader';
 import type { MatchDetails } from '../../types/matchDetails';
 import type { MatchData } from '../../types/matchData';
 import type { AfterMatchConfig } from '../../types/config';
@@ -32,17 +33,7 @@ const AfterMatchStats = ({ matchDetails, matchData, afterMatchConfig }: AfterMat
   return (
     <div className={`${styles['after-match-wrapper']} ${styles[animationClass]}`}>
       <div className={styles['after-match-inner']}>
-        <div className={styles['info-header']}>
-          <div className={styles['competition-logo']}>
-            {competitionLogo && (
-              <img src={competitionLogo} alt="Competition Logo" className={styles['competition-logo-img']} /*style={{ backgroundColor: '#bdc3c7', padding: '5px' }}*/ />
-            )}
-          </div>
-          <div style={{ width: '100%' }}>
-            <div className={styles['competition']}>{matchHeader}</div>
-            <div className={styles['category']}>{extendedInfo}</div>
-          </div>
-        </div>
+        <PanelHeader competitionLogo={competitionLogo} title={matchHeader} subtitle={extendedInfo} />
         <div className={styles['table-wrapper']}>
           <table className={styles['after-match-table']}>
             <thead>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styles from './LiveScoreboard.module.css';
 import UniformIcon from '../shared/UniformIcon';
+import { OutlinedLogo } from '../shared/OutlinedLogo';
 import type { MatchDetails } from '../../types/matchDetails';
 import type { MatchData, MatchStats } from '../../types/matchData';
 import type { SpectatorStatus } from '../../hooks/useSpectatorSocket';
@@ -48,7 +49,7 @@ function setWinner(scoreA: number, scoreB: number): 'A' | 'B' | null {
 }
 
 const LiveScoreboard = ({ matchDetails, matchData, status }: Props) => {
-  const { teams, teamLogos, teamColors, matchHeader, extendedInfo, stadium } = matchDetails;
+  const { teams, teamLogos, teamColors, matchHeader, extendedInfo, stadium, competitionLogo } = matchDetails;
   const { scores, setsWon, setScores, setStats, currentServer, winner, matchPhase,
           statistics, currentSetStats } = matchData;
 
@@ -84,6 +85,9 @@ const LiveScoreboard = ({ matchDetails, matchData, status }: Props) => {
           {isLive ? 'En directo' : isEnded ? 'Finalizado' : 'Previo'}
         </div>
         <div className={styles.matchLabel}>
+          {competitionLogo && (
+            <OutlinedLogo key={competitionLogo} src={competitionLogo} alt="Competition Logo" className={styles.competitionLogo} />
+          )}
           {matchHeader && <div>{matchHeader}</div>}
           {extendedInfo && <div>{extendedInfo}</div>}
         </div>

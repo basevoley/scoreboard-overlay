@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './TeamComparisonTable.module.css';
 import useComponentVisibility from '../../hooks/useComponentVisibility';
+import PanelHeader from '../shared/PanelHeader';
 import type { MatchDetails } from '../../types/matchDetails';
 
 const STATS: { label: string; key: keyof import('../../types/matchDetails').SeasonStats }[] = [
@@ -28,6 +29,11 @@ const TeamComparisonTable = ({ matchDetails, enabled }: TeamComparisonTableProps
 
   return (
     <div className={`${styles['comparison-wrapper']} ${styles[animationClass]}`}>
+      <PanelHeader
+        competitionLogo={matchDetails.competitionLogo}
+        title={matchDetails.matchHeader}
+        subtitle={matchDetails.extendedInfo}
+      />
       <table className={styles['comparison-table']}>
         <thead>
           <tr>
@@ -37,7 +43,9 @@ const TeamComparisonTable = ({ matchDetails, enabled }: TeamComparisonTableProps
                 <div className={styles['team-name']}>{matchDetails.teams.teamA}</div>
               </div>
             </th>
-            <th className={styles['empty-cell']}><span className={styles['vs']}>vs</span></th>
+            <th className={styles['empty-cell']}>
+              <span className={styles['vs']}>vs</span>
+            </th>
             <th className={styles['header-cell']}>
               <div>
                 <img src={matchDetails.teamLogos.teamB} alt={matchDetails.teams.teamB} className={styles['team-logo']} />

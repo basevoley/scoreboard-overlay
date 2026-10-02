@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './MatchupPresentation.module.css';
 import useComponentVisibility from '../../hooks/useComponentVisibility';
 import type { MatchDetails } from '../../types/matchDetails';
+import { OutlinedLogo } from '../shared/OutlinedLogo';
 
 interface MatchupPresentationProps {
   matchDetails: MatchDetails;
@@ -17,12 +18,17 @@ const MatchupPresentation = ({ matchDetails, enabled }: MatchupPresentationProps
   return (
     <div className={`${styles['matchup-wrapper']} ${styles[animationClass]}`}>
       <div className={styles['matchup-card']}>
-        <div className={styles['details-container']}>
-          <div className={styles['competition-info']}>
-            <span className={styles['competition']}>{matchHeader}</span>
+        <div className={styles['header-row']}>
+          {competitionLogo && (
+            <OutlinedLogo key={competitionLogo} src={competitionLogo} alt="Competition Logo" className={styles['competition-logo']} />
+          )}
+          <div className={styles['details-container']}>
+            <div className={styles['competition-info']}>
+              <span className={styles['competition']}>{matchHeader}</span>
+            </div>
+            <span className={styles['category']}>{extendedInfo}</span>
+            <span className={styles['location']}>{stadium}</span>
           </div>
-          <span className={styles['category']}>{extendedInfo}</span>
-          <span className={styles['location']}>{stadium}</span>
         </div>
         <div className={styles['teams-container']}>
           <div className={styles['team']}>
@@ -33,9 +39,6 @@ const MatchupPresentation = ({ matchDetails, enabled }: MatchupPresentationProps
           </div>
           <div className={styles['vs-container']}>
             <span className={styles['vs']}>vs</span>
-            {competitionLogo && (
-              <img src={competitionLogo} alt="Competition Logo" className={styles['competition-logo']} /* style={{ backgroundColor: '#bdc3c7', padding: '5px' }} */ />
-            )}
           </div>
           <div className={styles['team']}>
             <div className={styles['logo-container']}>

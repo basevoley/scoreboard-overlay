@@ -1,0 +1,34 @@
+/* src/components/shared/PanelHeader.module.css */
+
+.panel-header {
+  margin-bottom: 10px;
+  border-radius: var(--ov-radius);
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  background-color: var(--ov-bg);
+}
+
+.competition-logo {
+  height: auto;
+  width: auto;
+  max-height: 100px;
+  max-width: 200px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: var(--ov-text);
+}
+
+.subtitle {
+  font-size: 1rem;
+  font-weight: normal;
+  color: var(--ov-text-muted);
+}

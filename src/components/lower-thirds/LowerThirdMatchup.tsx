@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styles from './LowerThirdMatchup.module.css';
 import useComponentVisibility from '../../hooks/useComponentVisibility';
+import { OutlinedLogo } from '../shared/OutlinedLogo';
 import type { MatchDetails } from '../../types/matchDetails';
 
 interface LowerThirdMatchupProps {
@@ -26,32 +27,34 @@ const LowerThirdMatchup = ({ matchDetails, enabled }: LowerThirdMatchupProps) =>
 
   return (
     <div className={`${styles['lower-third-wrapper']} ${styles[animationClass]}`}>
-      <div className={styles['lower-third-container']}>
-        <div className={styles['team-logo-left']}>
-          <img src={matchDetails.teamLogos.teamA} alt={matchDetails.teams.teamA} className={styles['team-logo']} />
-        </div>
-        <div className={styles['text-content']}>
-          <div className={styles['teams-vs']}>
-            <span className={styles['team-name']}>{matchDetails.teams.teamA}</span>
-            <span className={styles['vs']}>vs</span>
-            <span className={styles['team-name']}>{matchDetails.teams.teamB}</span>
+      <div className={styles['lower-third-row']}>
+        {competitionLogo && (
+          <OutlinedLogo key={competitionLogo} src={competitionLogo} alt="Competition Logo" className={styles['competition-logo']} />
+        )}
+        <div className={styles['lower-third-container']}>
+          <div className={styles['team-logo-left']}>
+            <img src={matchDetails.teamLogos.teamA} alt={matchDetails.teams.teamA} className={styles['team-logo']} />
           </div>
-          <div className={styles['animated-text-container']}>
-            {cyclingTexts.map((text, index) => (
-              <span
-                key={index}
-                className={`${styles['text-line-2']} ${currentTextIndex === index ? styles['is-visible'] : ''}`}
-              >
-                {text}
-              </span>
-            ))}
+          <div className={styles['text-content']}>
+            <div className={styles['teams-vs']}>
+              <span className={styles['team-name']}>{matchDetails.teams.teamA}</span>
+              <span className={styles['vs']}>vs</span>
+              <span className={styles['team-name']}>{matchDetails.teams.teamB}</span>
+            </div>
+            <div className={styles['animated-text-container']}>
+              {cyclingTexts.map((text, index) => (
+                <span
+                  key={index}
+                  className={`${styles['text-line-2']} ${currentTextIndex === index ? styles['is-visible'] : ''}`}
+                >
+                  {text}
+                </span>
+              ))}
+            </div>
           </div>
-          <div className={styles['competition-logo']}>
-            {competitionLogo && <img src={competitionLogo} alt="Competition Logo" className={styles['competition-logo-img']} />}
+          <div className={styles['team-logo-right']}>
+            <img src={matchDetails.teamLogos.teamB} alt={matchDetails.teams.teamB} className={styles['team-logo']} />
           </div>
-        </div>
-        <div className={styles['team-logo-right']}>
-          <img src={matchDetails.teamLogos.teamB} alt={matchDetails.teams.teamB} className={styles['team-logo']} />
         </div>
       </div>
     </div>

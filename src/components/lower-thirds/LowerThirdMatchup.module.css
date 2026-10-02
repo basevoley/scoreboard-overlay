@@ -21,6 +21,21 @@
   opacity: 0;
 }
 
+.lower-third-row {
+  display: grid;
+  grid-template-columns: auto auto;
+  align-items: stretch;
+  gap: 8px;
+}
+
+.competition-logo {
+  height: auto;
+  width: auto;
+  max-height: 100%;
+  max-width: 6.5rem;
+  object-fit: contain;
+}
+
 .lower-third-container {
   display: flex;
   justify-content: space-between;
@@ -112,15 +127,4 @@
 
 .text-line-2.is-visible {
   opacity: 1;
-}
-
-.competition-logo {
-  margin-top: 5px;
-}
-
-.competition-logo-img {
-  height: 25px;
-  /* background-color: var(--ov-text-muted); */
-  padding: 2px;
-  filter: brightness(0.5) grayscale(1) invert(1);
 }

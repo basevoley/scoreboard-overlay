@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './Lineup.module.css';
 import useComponentVisibility from '../../hooks/useComponentVisibility';
 import UniformIcon from '../shared/UniformIcon';
+import PanelHeader from '../shared/PanelHeader';
 import type { MatchDetails } from '../../types/matchDetails';
 import type { LineupConfig } from '../../types/config';
 
@@ -23,6 +24,11 @@ const Lineup = ({ matchDetails, config }: LineupProps) => {
   return (
     <div className={`${styles['after-match-wrapper']} ${styles[animationClass]}`}>
       <div className={styles['after-match-inner']}>
+        <PanelHeader
+          competitionLogo={matchDetails.competitionLogo}
+          title={matchDetails.matchHeader}
+          subtitle={matchDetails.extendedInfo}
+        />
         <div className={styles['table-wrapper']}>
           <table className={styles['comparison-table']}>
             <thead>
@@ -33,7 +39,9 @@ const Lineup = ({ matchDetails, config }: LineupProps) => {
                     <div className={styles['team-name']}>{matchDetails.teams.teamA}</div>
                   </div>
                 </th>
-                <th className={styles['empty-cell']}><span className={styles['vs']}>vs</span></th>
+                <th className={styles['empty-cell']}>
+                  <span className={styles['vs']}>vs</span>
+                </th>
                 <th className={styles['header-cell']}>
                   <div>
                     <img src={matchDetails.teamLogos.teamB} alt={matchDetails.teams.teamB} className={styles['team-logo']} />

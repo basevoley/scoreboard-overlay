@@ -4,6 +4,7 @@ import useComponentVisibility from '../../hooks/useComponentVisibility';
 import DroplinePanel from '../shared/DroplinePanel';
 import ContentFlipper from '../shared/ContentFlipper';
 import UniformIcon from '../shared/UniformIcon';
+import { OutlinedLogo } from '../shared/OutlinedLogo';
 import type { MatchDetails } from '../../types/matchDetails';
 import type { MatchData } from '../../types/matchData';
 import type { ScoreboardConfig } from '../../types/config';
@@ -38,7 +39,11 @@ const Scoreboard = ({ matchDetails, matchData, scoreboardConfig, enabled, panelD
 
   return (
     <div className={`${styles['scoreboard-wrapper']} ${positionClass} ${styles[animationClass]}`}>
-      <div className={styles['scoreboard-container']}>
+      <div className={styles['scoreboard-row']}>
+        {matchDetails.competitionLogo && (
+          <OutlinedLogo key={matchDetails.competitionLogo} src={matchDetails.competitionLogo} alt="Competition Logo" className={styles['competition-logo']} />
+        )}
+        <div className={styles['scoreboard-container']}>
         {/* Team A */}
         <div className={styles['team-info']}>
           <ContentFlipper
@@ -88,6 +93,7 @@ const Scoreboard = ({ matchDetails, matchData, scoreboardConfig, enabled, panelD
             front={<img src={matchDetails.teamLogos.teamB} alt={matchDetails.teams.teamB} className={styles['team-logo']} />}
             back={<UniformIcon shirtColor={matchDetails.teamColors.teamB} size={FLIPPER_SIZE} />}
           />
+        </div>
         </div>
       </div>
 

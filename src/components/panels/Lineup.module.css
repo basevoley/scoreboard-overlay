@@ -55,8 +55,8 @@
 }
 
 .team-logo {
-  width: 200px;
-  height: 200px;
+  width: 110px;
+  height: 110px;
   border-radius: 50%;
   border: 3px solid var(--ov-primary);
   background-color: white;
@@ -78,6 +78,7 @@
   background-clip: text;
   color: transparent;
 }
+
 
 /* ===== STATS TBODY ANIMATION STYLES ===== */
 

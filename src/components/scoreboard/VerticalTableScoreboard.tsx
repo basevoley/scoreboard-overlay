@@ -4,6 +4,7 @@ import useComponentVisibility from '../../hooks/useComponentVisibility';
 import DroplinePanel from '../shared/DroplinePanel';
 import ContentFlipper from '../shared/ContentFlipper';
 import UniformIcon from '../shared/UniformIcon';
+import { OutlinedLogo } from '../shared/OutlinedLogo';
 import type { MatchDetails } from '../../types/matchDetails';
 import type { MatchData } from '../../types/matchData';
 import type { ScoreboardConfig } from '../../types/config';
@@ -70,12 +71,17 @@ const VerticalTableScoreboard = ({ matchDetails, matchData, scoreboardConfig, en
 
   return (
     <div className={`${styles['scoreboard-wrapper']} ${positionClass} ${styles['table-container']} ${styles[animationClass]}`}>
-      <table className={styles['scoreboard-table']}>
-        <tbody>
-          {renderTeamRow('teamA')}
-          {renderTeamRow('teamB')}
-        </tbody>
-      </table>
+      <div className={styles['scoreboard-row']}>
+        {matchDetails.competitionLogo && (
+          <OutlinedLogo key={matchDetails.competitionLogo} src={matchDetails.competitionLogo} alt="Competition Logo" className={styles['competition-logo']} />
+        )}
+        <table className={styles['scoreboard-table']}>
+          <tbody>
+            {renderTeamRow('teamA')}
+            {renderTeamRow('teamB')}
+          </tbody>
+        </table>
+      </div>
       {panelData && (
         <DroplinePanel
           icon={panelData.icon}
