@@ -17,12 +17,10 @@
 
 .hidden {
   opacity: 0;
-  transform: scale(0.8);
 }
 
 .visible {
   opacity: 1;
-  transform: scale(1);
 }
 
 .top    { transform: translate(calc(50cqi - 50%), var(--gap)); }

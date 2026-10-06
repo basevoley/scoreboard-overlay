@@ -2,13 +2,19 @@ import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import styles from './SubscribeAnimation.module.css';
 import confetti from 'canvas-confetti';
+import useComponentVisibility from '../../hooks/useComponentVisibility';
 import type { SubscribeConfig } from '../../types/config';
 
 interface SubscribeAnimationProps {
   config: SubscribeConfig;
 }
 
-const SubscribeAnimation = ({ config }: SubscribeAnimationProps) => {
+interface SubscribeContentProps extends SubscribeAnimationProps {
+  animationClass: string;
+}
+
+// Mounted only while the animation is visible, so the infinite motion loops stop when hidden.
+const SubscribeContent = ({ config, animationClass }: SubscribeContentProps) => {
   const { enabled, position } = config;
   const containerRef = useRef<HTMLDivElement>(null);
   const cycleTime = 3;
@@ -41,7 +47,7 @@ const SubscribeAnimation = ({ config }: SubscribeAnimationProps) => {
   };
 
   return (
-    <div ref={containerRef} className={`${styles['overlay-wrapper']} ${positionClass} ${enabled ? styles.visible : styles.hidden}`}>
+    <div ref={containerRef} className={`${styles['overlay-wrapper']} ${positionClass} ${animationClass === 'fade-in' ? styles.visible : styles.hidden}`}>
       <div className={styles.overlayContainer}>
         <motion.div
           className={styles.logoWrapper}
@@ -82,6 +88,14 @@ const SubscribeAnimation = ({ config }: SubscribeAnimationProps) => {
       </div>
     </div>
   );
+};
+
+const SubscribeAnimation = ({ config }: SubscribeAnimationProps) => {
+  const { isVisible, animationClass } = useComponentVisibility(config.enabled, 500);
+
+  if (!isVisible) return null;
+
+  return <SubscribeContent config={config} animationClass={animationClass} />;
 };
 
 export default SubscribeAnimation;
