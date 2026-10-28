@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import io from 'socket.io-client';
 import { initialMatchDetails, initialMatchData, initialRuntimeConfig, initialOverlaySetup } from '../mockData';
 import type { MatchDetails } from '../types/matchDetails';
-import type { MatchData, MatchEvent } from '../types/matchData';
+import type { MatchData, MatchEvent, EffectPayload } from '../types/matchData';
 import type { OverlayConfig, RuntimeConfig, OverlaySetup } from '../types/config';
 import { applyTheme } from '../theme/tokens';
 
@@ -28,6 +28,7 @@ export function useSocket() {
   const [runtimeConfig, setRuntimeConfig] = useState<RuntimeConfig | null>(null);
   const [overlaySetup, setOverlaySetup] = useState<OverlaySetup | null>(null);
   const [matchEvent, setMatchEvent] = useState<MatchEvent | null>(null);
+  const [effect, setEffect] = useState<EffectPayload | null>(null);
   const [connectionStatus, setConnectionStatus] = useState('disconnected');
   const statusRef = useRef('disconnected');
 
@@ -103,6 +104,11 @@ export function useSocket() {
       setMatchEvent(data);
     });
 
+    socket.on('triggerEffect', (data: EffectPayload) => {
+      console.log('triggerEffect received:', JSON.stringify(data));
+      setEffect(data);
+    });
+
     socket.on('reload', () => {
       console.log('Reload received!');
       window.location.reload();
@@ -119,5 +125,5 @@ export function useSocket() {
     ? mergeConfig(runtimeConfig, overlaySetup)
     : null;
 
-  return { matchDetails, matchData, config, matchEvent, setMatchEvent, setConfig: setRuntimeConfig, connectionStatus };
+  return { matchDetails, matchData, config, matchEvent, setMatchEvent, effect, setEffect, setConfig: setRuntimeConfig, connectionStatus };
 }
