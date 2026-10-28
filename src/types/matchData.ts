@@ -39,3 +39,14 @@ export interface MatchData {
   currentSetStats: { teamA: MatchStats; teamB: MatchStats };
   winner: 'teamA' | 'teamB' | null;
 }
+
+export type TextEffectId = 'superman' | 'explosion' | 'pop' | 'shooting' | 'glitch' | 'jumbotron' | 'slam' | 'laser' | 'sonic' | 'wave';
+
+// One celebration sent by the control app (`triggerEffect`): text and crowd are parts of the same event
+export interface EffectPayload {
+  id: number;
+  team: 'teamA' | 'teamB';
+  text?: { content: string; effect: TextEffectId };
+  crowd: boolean;
+  durationMs: number;
+}

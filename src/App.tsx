@@ -9,6 +9,7 @@ import AfterMatchStats from './components/panels/AfterMatchStats';
 import SponsorsPanel from './components/panels/SponsorsPanel';
 import SubscribeAnimation from './components/panels/SubscribeAnimation';
 import Lineup from './components/panels/Lineup';
+import PointEffect from './components/effects/PointEffect';
 import DevControls from './components/DevControls';
 import ErrorBoundary from './components/shared/ErrorBoundary';
 import { useSocket } from './hooks/useSocket';
@@ -23,7 +24,7 @@ if (!SOCKET_SERVER_URL) {
 }
 
 function App() {
-  const { matchDetails, matchData, config, matchEvent, setMatchEvent, setConfig, connectionStatus } = useSocket();
+  const { matchDetails, matchData, config, matchEvent, setMatchEvent, effect, setEffect, setConfig, connectionStatus } = useSocket();
 
   return (
     <>
@@ -32,6 +33,7 @@ function App() {
           matchDetails={matchDetails}
           config={config}
           setMatchEvent={setMatchEvent}
+          setEffect={setEffect}
           setConfig={setConfig}
         />
       )}
@@ -71,6 +73,9 @@ function App() {
             </ErrorBoundary>
             <ErrorBoundary name="SubscribeAnimation">
               <SubscribeAnimation config={config.subscribe} />
+            </ErrorBoundary>
+            <ErrorBoundary name="PointEffect">
+              <PointEffect effect={effect} matchDetails={matchDetails} />
             </ErrorBoundary>
             <ErrorBoundary name="Lineup">
               <Lineup matchDetails={matchDetails} config={config.lineup} />

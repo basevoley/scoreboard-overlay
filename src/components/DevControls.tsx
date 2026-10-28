@@ -1,6 +1,6 @@
 import React from 'react';
 import type { MatchDetails } from '../types/matchDetails';
-import type { MatchEvent } from '../types/matchData';
+import type { MatchEvent, EffectPayload } from '../types/matchData';
 import type { OverlayConfig, RuntimeConfig } from '../types/config';
 
 const POSITIONS = ['top', 'top-left', 'top-right', 'bottom', 'bottom-right', 'bottom-left', 'center'];
@@ -9,12 +9,23 @@ interface DevControlsProps {
   matchDetails: MatchDetails;
   config: OverlayConfig;
   setMatchEvent: React.Dispatch<React.SetStateAction<MatchEvent | null>>;
+  setEffect: React.Dispatch<React.SetStateAction<EffectPayload | null>>;
   setConfig: React.Dispatch<React.SetStateAction<RuntimeConfig | null>>;
 }
 
-const DevControls = ({ matchDetails, config, setMatchEvent, setConfig }: DevControlsProps) => {
+const DevControls = ({ matchDetails, config, setMatchEvent, setEffect, setConfig }: DevControlsProps) => {
   const triggerMatchEvent = (eventType: string, eventDetails: { text: string; team: string }) => {
     setMatchEvent({ timestamp: Date.now(), type: eventType, details: eventDetails });
+  };
+
+  const triggerEffect = (parts: { text?: boolean; crowd: boolean }) => {
+    setEffect({
+      id: Date.now(),
+      team: 'teamA',
+      ...(parts.text && { text: { content: `PUNTAZO ${matchDetails.teams.teamA.toUpperCase()}!!!`, effect: 'pop' as const } }),
+      crowd: parts.crowd,
+      durationMs: 4000,
+    });
   };
 
   const toggleComponent = (key: keyof RuntimeConfig) => {
@@ -72,6 +83,15 @@ const DevControls = ({ matchDetails, config, setMatchEvent, setConfig }: DevCont
       </button>
       <button onClick={() => triggerMatchEvent('substitution', { text: 'Substitution', team: matchDetails.teams.teamA })}>
         Player Substitution
+      </button>
+      <button onClick={() => triggerEffect({ text: true, crowd: true })}>
+        Celebration (text + crowd)
+      </button>
+      <button onClick={() => triggerEffect({ text: true, crowd: false })}>
+        Celebration (text only)
+      </button>
+      <button onClick={() => triggerEffect({ crowd: true })}>
+        Celebration (crowd only)
       </button>
       <button onClick={() => toggleComponent('matchup')}>
         Toggle Matchup ({config.matchup.enabled.toString()})
